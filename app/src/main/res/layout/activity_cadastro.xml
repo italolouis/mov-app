@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="br.com.movapp.activity.CadastroActivity">
+
+    <LinearLayout
+        android:id="@+id/email_login_form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textCadastroNome"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/lblCadastroNome"
+            android:textSize="15dp" />
+
+        <EditText
+            android:id="@+id/edtCadastroNome"
+            android:inputType="text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:imeActionId="6"
+            android:imeOptions="actionUnspecified"
+            android:maxLines="1"
+            android:singleLine="true" />
+
+        <TextView
+            android:id="@+id/textCadastroDtNasc"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/lblCadastroDtNascimento"
+            android:textSize="15dp" />
+
+        <EditText
+            android:id="@+id/edtCadastroDtNasc"
+            android:inputType="date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10" />
+
+        <TextView
+            android:id="@+id/textGenero"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/lblCadastroGenero"
+            android:textSize="15dp" />
+
+        <Spinner
+            android:id="@+id/spinnerGenero"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="15dp"/>
+
+        <TextView
+            android:id="@+id/textAltura"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/lblCadastroAltura"
+            android:textSize="15dp" />
+
+        <EditText
+            android:id="@+id/edtCadastroAltura"
+            android:inputType="numberDecimal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="279dp" />
+
+        <TextView
+            android:id="@+id/textCelular"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/lblCadastroCelular"
+            android:textSize="15dp" />
+
+        <EditText
+            android:id="@+id/edtCadastroCelular"
+            android:inputType="phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10" />
+
+        <TextView
+            android:id="@+id/textCadastroEmail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/lblCadastroEmail"
+            android:textSize="15dp" />
+
+        <EditText
+            android:id="@+id/edtCadastroEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:imeActionId="6"
+            android:imeOptions="actionUnspecified"
+            android:maxLines="1"
+            android:singleLine="true" />
+
+        <TextView
+            android:id="@+id/textCadastroSenha"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/lblCadastroSenha"
+            android:textSize="15dp" />
+
+        <EditText
+            android:id="@+id/edtCadastroSenha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:imeActionId="6"
+            android:imeOptions="actionUnspecified"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:singleLine="true" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/btn_cadastro"
+            style="?android:textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:text="@string/action_cadastrar"
+            android:textStyle="bold"
+            android:background="#07BE9F"
+            android:layout_alignParentBottom="true"
+            android:textColor="@color/colorWhite"/>
+    </RelativeLayout>
+
+</RelativeLayout>
