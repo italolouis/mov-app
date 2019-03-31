@@ -54,27 +54,31 @@
             android:text="@string/lblCadastroGenero"
             android:textSize="15dp" />
 
-        <Spinner
+        <android.support.v7.widget.AppCompatSpinner
             android:id="@+id/spinnerGenero"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textSize="15dp"/>
+            android:spinnerMode="dialog"
+            android:textSize="15dp"
+            style="@style/Widget.AppCompat.Spinner.Underlined" />
 
         <TextView
             android:id="@+id/textAltura"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/lblCadastroAltura"
-            android:textSize="15dp" />
+            android:textSize="15dp"
+            android:inputType="numberDecimal"/>
 
         <EditText
             android:id="@+id/edtCadastroAltura"
-            android:inputType="numberDecimal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
             tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="279dp" />
+            tools:layout_editor_absoluteY="279dp"
+            android:inputType="numberDecimal|number"
+            android:digits="1.20"/>
 
         <TextView
             android:id="@+id/textCelular"
@@ -104,7 +108,8 @@
             android:imeActionId="6"
             android:imeOptions="actionUnspecified"
             android:maxLines="1"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:inputType="textEmailAddress"/>
 
         <TextView
             android:id="@+id/textCadastroSenha"
