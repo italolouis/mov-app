@@ -1,5 +1,6 @@
 package br.com.movapp.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -46,6 +47,10 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
                 //Conseguiu conectar com o servidor
                 public void onResponse(Call call, Response response) {
                     Log.i("onResponde", "Requisicao com sucesso");
+
+                    Intent loginIntent = new Intent(CadastroActivity.this, LoginActivity.class);
+                    CadastroActivity.this.startActivity(loginIntent);
+
                 }
 
                 //Nao deu certo a execução
@@ -56,8 +61,8 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
                 }
             });
 
-            Toast.makeText(CadastroActivity.this, "Usuario " + usuario.getNome() + " salvo!", Toast.LENGTH_SHORT).show();
-            finish();
+           // Toast.makeText(CadastroActivity.this, "Usuario " + usuario.getNome() + " salvo!", Toast.LENGTH_SHORT).show();
+
         }
     }
 

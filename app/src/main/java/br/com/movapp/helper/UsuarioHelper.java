@@ -4,6 +4,10 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.telephony.PhoneNumberFormattingTextWatcher;
+import android.text.InputFilter;
+import android.text.InputType;
+import android.text.method.DigitsKeyListener;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
@@ -30,7 +34,7 @@ public class UsuarioHelper {
     private int mYear, mMonth, mDay;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
-    public UsuarioHelper(CadastroActivity activity){
+    public UsuarioHelper(final CadastroActivity activity){
         edtCadastroNome = (EditText) activity.findViewById(R.id.edtCadastroNome);
         edtCadastroCelular = (EditText)activity.findViewById(R.id.edtCadastroCelular);
         edtCadastroDtNasc = (EditText) activity.findViewById(R.id.edtCadastroDtNasc);
@@ -39,45 +43,29 @@ public class UsuarioHelper {
         edtCadastroEmail = (EditText) activity.findViewById(R.id.edtCadastroEmail);
         edtCadastroSenha = (EditText) activity.findViewById(R.id.edtCadastroSenha);
 
-        //Listeners
+        //Formata telefone
+        edtCadastroCelular .addTextChangedListener(new PhoneNumberFormattingTextWatcher());
+
+        //Monta array do spinner para gênero
         spinnerGenero.setOnItemSelectedListener(null);
         montaListGenero(spinnerGenero,activity);
 
-        /*edtCadastroDtNasc.setOnClickListener(new View.OnClickListener() {
+        //Listener
+        edtCadastroDtNasc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Calendar c = Calendar.getInstance();
-                mYear = c.get(Calendar.YEAR);
-                mMonth = c.get(Calendar.MONTH);
-                mDay = c.get(Calendar.DAY_OF_MONTH);
-
-                DatePickerDialog dialog = new DatePickerDialog(
-                        activity,
-                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
-                        mDateSetListener,
-                        mYear,mMonth,mDay);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.show();
-
-                mDateSetListener = new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                        month = month + 1;
-
-                        String date = month + "/" + day + "/" + year;
-                        edtCadastroDtNasc.setText(date);
-                    }
-                };
+                criaDialogDataNascimento(activity);
             }
-        });*/
+        });
 
         usuario = new Usuario();
     }
 
+
     public Usuario getUsuario(){
         usuario.setNome(edtCadastroNome.getText().toString());
-       // usuario.setDtNascimento(Date.valueOf(edtCadastroDtNasc.getText().toString()));
-       // usuario.setGenero(spinnerGenero.getTag().toString());
+       //usuario.setDtNascimento(Date.valueOf(edtCadastroDtNasc.getText().toString()));
+        usuario.setGenero(spinnerGenero.getSelectedItem().toString().substring(0,1));
         usuario.setAltura(Float.valueOf(edtCadastroAltura.getText().toString()));
         usuario.setTelefone(edtCadastroCelular.getText().toString());
         usuario.setEmail(edtCadastroEmail.getText().toString());
@@ -92,9 +80,34 @@ public class UsuarioHelper {
         generos.add("Feminino");
         generos.add("Masculino");
 
-        //Criado adapter para o spinnerGenero
+        //Criado adapter para o spinner Genero
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(activity, android.R.layout.simple_spinner_item, generos);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerGenero.setAdapter(dataAdapter);
+    }
+
+    public void criaDialogDataNascimento(Activity activity){
+        final Calendar c = Calendar.getInstance();
+        mYear = c.get(Calendar.YEAR);
+        mMonth = c.get(Calendar.MONTH);
+        mDay = c.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog dialog = new DatePickerDialog(
+                activity,
+                android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                mDateSetListener,
+                mYear,mMonth,mDay);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
+
+        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month = month + 1;
+
+                String date = day + "/" + month + "/" + year;
+                edtCadastroDtNasc.setText(date);
+            }
+        };
     }
 }

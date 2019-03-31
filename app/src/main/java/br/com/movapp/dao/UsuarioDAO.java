@@ -2,6 +2,7 @@ package br.com.movapp.dao;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.NonNull;
@@ -15,7 +16,7 @@ public class UsuarioDAO extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql = "CREATE TABLE Usuario (" +
+        String sql = "CREATE TABLE usuario(" +
                 "codUsuario INTEGER PRIMARY KEY, " +
                 "nome TEXT NOT NULL, "+
                 "dtNascimento DATE, " +
@@ -51,4 +52,14 @@ public class UsuarioDAO extends SQLiteOpenHelper {
        // dados.put("bloqueio", usuario.getBloqueio());
         return dados;
     }
+
+    public boolean isUser(String email, String senha) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT * FROM usuario WHERE email = ? AND senha = ?", new String[]{email,senha});
+        int resultados = c.getCount();
+        c.close();
+        return resultados > 0;
+    }
+
+
 }

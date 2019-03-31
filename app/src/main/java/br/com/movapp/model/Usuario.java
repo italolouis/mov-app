@@ -3,9 +3,9 @@ package br.com.movapp.model;
 import java.util.Date;
 
 public class Usuario {
-    private int codUsuario;
+    private int codusu;
     private String nome;
-    private Date dtNascimento;
+    private Date dtnascimento;
     //private int idade;
     private String genero;
     private float altura;
@@ -14,12 +14,12 @@ public class Usuario {
     private String senha;
     private String bloqueio;
 
-    public int getCodUsuario() {
-        return codUsuario;
+    public int getCodusu() {
+        return codusu;
     }
 
-    public void setCodUsuario(int codUsuario) {
-        this.codUsuario = codUsuario;
+    public void setCodusu(int codusu) {
+        this.codusu = codusu;
     }
 
     public String getNome() {
@@ -30,15 +30,15 @@ public class Usuario {
         this.nome = nome;
     }
 
-    public Date getDtNascimento() {
-        return dtNascimento;
+    public Date getDtnascimento() {
+        return dtnascimento;
     }
 
-    public void setDtNascimento(Date dtNascimento) {
-        this.dtNascimento = dtNascimento;
+    public void setDtnascimento(Date dtnascimento) {
+        this.dtnascimento = dtnascimento;
     }
 
-    /*public int getIdade() {
+   /*public int getIdade() {
         return idade;
     }
 
