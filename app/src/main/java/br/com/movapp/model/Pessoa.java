@@ -1,9 +1,13 @@
 package br.com.movapp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class Usuario {
-    private int codusu;
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Pessoa implements Serializable {
+    private Long codusu;
     private String nome;
     private Date dtnascimento;
     //private int idade;
@@ -13,12 +17,13 @@ public class Usuario {
     private String email;
     private String senha;
     private String bloqueio;
+    private Endereco endereco;
 
-    public int getCodusu() {
+    public Long getCodusu() {
         return codusu;
     }
 
-    public void setCodusu(int codusu) {
+    public void setCodusu(Long codusu) {
         this.codusu = codusu;
     }
 
@@ -92,5 +97,18 @@ public class Usuario {
 
     public void setBloqueio(String bloqueio) {
         this.bloqueio = bloqueio;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    @Override
+    public String toString() {
+        return getCodusu() + " - " + getNome();
     }
 }

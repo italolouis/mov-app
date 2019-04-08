@@ -20,6 +20,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -34,7 +35,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.movapp.R;
-import br.com.movapp.dao.UsuarioDAO;
+import br.com.movapp.dao.PessoaDAO;
+import br.com.movapp.dto.PessoaSync;
+import br.com.movapp.retrofit.RetrofitInicializador;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -65,7 +71,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
-    private UsuarioDAO usuarioDAO;
+    private PessoaDAO pessoaDAO;
     private TextView mNovoUsuario;
 
     @Override
@@ -107,7 +113,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
-        usuarioDAO = new UsuarioDAO(this);
+        pessoaDAO = new PessoaDAO(this);
     }
 
     private void populateAutoComplete() {
@@ -331,8 +337,43 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 return false;
             }
 
-            Boolean resultado = usuarioDAO.isUser(mEmail, mPassword);
+           /* Call<PessoaSync> call = new RetrofitInicializador().getUsuarioSerice().lista();
+            call.enqueue(new Callback<PessoaSync>() {
+                @Override
+                public void onResponse(Call<PessoaSync> call, Response<PessoaSync> response) {
+                    PessoaSync pessoaSync = response.body();
+                    PessoaDAO dao = new PessoaDAO(LoginActivity.this);
+                    dao.sincroniza(pessoaSync.getPessoas());
+                    dao.close();
+                }
+
+                @Override
+                public void onFailure(Call<PessoaSync> call, Throwable t) {
+                    Log.e("onFailure", t.getMessage());
+
+                }
+            });*/
+
+            Call<PessoaSync> call = new RetrofitInicializador().getUsuarioSerice().lista();
+            call.enqueue(new Callback<PessoaSync>() {
+                @Override
+                public void onResponse(Call<PessoaSync> call, Response<PessoaSync> response) {
+                    PessoaSync pessoaSync = response.body();
+                    PessoaDAO dao = new PessoaDAO(LoginActivity.this);
+                    dao.sincroniza(pessoaSync.getPessoas());
+                    dao.close();
+                }
+
+                @Override
+                public void onFailure(Call<PessoaSync> call, Throwable t) {
+                    Log.e("onFailure", t.getMessage());
+
+                }
+            });
+
+            Boolean resultado = pessoaDAO.isUser(mEmail, mPassword);
             return resultado;
+
         }
 
         @Override

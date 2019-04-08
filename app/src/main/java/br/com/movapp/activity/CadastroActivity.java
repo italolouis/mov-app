@@ -9,9 +9,9 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import br.com.movapp.R;
-import br.com.movapp.dao.UsuarioDAO;
-import br.com.movapp.helper.UsuarioHelper;
-import br.com.movapp.model.Usuario;
+import br.com.movapp.dao.PessoaDAO;
+import br.com.movapp.helper.PessoaHelper;
+import br.com.movapp.model.Pessoa;
 import br.com.movapp.retrofit.RetrofitInicializador;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -19,14 +19,14 @@ import retrofit2.Response;
 
 public class CadastroActivity extends AppCompatActivity implements View.OnClickListener {
     private Button btn_cadastro;
-    private UsuarioHelper helper;
+    private PessoaHelper helper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
 
-        helper = new UsuarioHelper(this);
+        helper = new PessoaHelper(this);
 
         btn_cadastro = (Button) findViewById(R.id.btn_cadastro);
         btn_cadastro.setOnClickListener(CadastroActivity.this);
@@ -35,33 +35,32 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         if(v == btn_cadastro){
-            Usuario usuario = helper.getUsuario();
-            UsuarioDAO usuarioDAO = new UsuarioDAO(this);
-            usuarioDAO.insereUsuario(usuario);
-            usuarioDAO.close();
+            Pessoa pessoa = helper.getPessoa();
+            /*PessoaDAO pessoaDAO = new PessoaDAO(this);
+            pessoaDAO.inserePessoa(pessoa);
+            pessoaDAO.close();*/
 
-            Call call = new RetrofitInicializador().getUsuarioSerice().insere(usuario);
+            Call call = new RetrofitInicializador().getUsuarioSerice().insere(pessoa);
             //Metodo assimilar ao execute, mas vai fazer a execução assincrona
             call.enqueue(new Callback() {
                 @Override
                 //Conseguiu conectar com o servidor
                 public void onResponse(Call call, Response response) {
-                    Log.i("onResponde", "Requisicao com sucesso");
-
-                    Intent loginIntent = new Intent(CadastroActivity.this, LoginActivity.class);
-                    CadastroActivity.this.startActivity(loginIntent);
-
+                    if(response.code() == 201){
+                        Log.i("onResponde", "Requisicao com sucesso");
+                        Intent loginIntent = new Intent(CadastroActivity.this, LoginActivity.class);
+                        CadastroActivity.this.startActivity(loginIntent);
+                    }
                 }
 
                 //Nao deu certo a execução
                 @Override
                 public void onFailure(Call call, Throwable t) {
                     Log.e("onFailure", "Requisicao falhou");
+                    Toast.makeText(CadastroActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
 
                 }
             });
-
-           // Toast.makeText(CadastroActivity.this, "Usuario " + usuario.getNome() + " salvo!", Toast.LENGTH_SHORT).show();
 
         }
     }
