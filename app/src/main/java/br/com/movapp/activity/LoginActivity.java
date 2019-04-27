@@ -337,23 +337,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 return false;
             }
 
-           /* Call<PessoaSync> call = new RetrofitInicializador().getUsuarioSerice().lista();
-            call.enqueue(new Callback<PessoaSync>() {
-                @Override
-                public void onResponse(Call<PessoaSync> call, Response<PessoaSync> response) {
-                    PessoaSync pessoaSync = response.body();
-                    PessoaDAO dao = new PessoaDAO(LoginActivity.this);
-                    dao.sincroniza(pessoaSync.getPessoas());
-                    dao.close();
-                }
-
-                @Override
-                public void onFailure(Call<PessoaSync> call, Throwable t) {
-                    Log.e("onFailure", t.getMessage());
-
-                }
-            });*/
-
             Call<PessoaSync> call = new RetrofitInicializador().getUsuarioSerice().lista();
             call.enqueue(new Callback<PessoaSync>() {
                 @Override

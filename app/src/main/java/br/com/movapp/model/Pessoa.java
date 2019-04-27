@@ -3,16 +3,19 @@ package br.com.movapp.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Pessoa implements Serializable {
     private Long codusu;
     private String nome;
-    private Date dtnascimento;
+    private LocalDate dtnascimento;
+    private byte[] foto;
     //private int idade;
     private String genero;
-    private float altura;
+    private BigDecimal altura;
     private String telefone;
     private String email;
     private String senha;
@@ -35,15 +38,23 @@ public class Pessoa implements Serializable {
         this.nome = nome;
     }
 
-    public Date getDtnascimento() {
+    public LocalDate getDtnascimento() {
         return dtnascimento;
     }
 
-    public void setDtnascimento(Date dtnascimento) {
+    public void setDtnascimento(LocalDate dtnascimento) {
         this.dtnascimento = dtnascimento;
     }
 
-   /*public int getIdade() {
+    public byte[] getFoto() {
+        return foto;
+    }
+
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
+    }
+
+    /*public int getIdade() {
         return idade;
     }
 
@@ -59,11 +70,11 @@ public class Pessoa implements Serializable {
         this.genero = genero;
     }
 
-    public float getAltura() {
+    public BigDecimal getAltura() {
         return altura;
     }
 
-    public void setAltura(float altura) {
+    public void setAltura(BigDecimal altura) {
         this.altura = altura;
     }
 

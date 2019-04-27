@@ -2,22 +2,35 @@ package br.com.movapp.helper;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.telephony.PhoneNumberFormattingTextWatcher;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import java.io.ByteArrayOutputStream;
+import java.math.BigDecimal;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import br.com.movapp.R;
-import br.com.movapp.activity.CadastroActivity;
 import br.com.movapp.model.Endereco;
 import br.com.movapp.model.Pessoa;
+import br.com.movapp.retrofit.RetrofitCep;
+import br.com.movapp.utils.MovUtils;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PessoaHelper {
     private EditText edtCadastroNome;
@@ -33,13 +46,15 @@ public class PessoaHelper {
     private EditText edtCadastroNum;
     private EditText edtCadastroComple;
     private EditText edtCadastroBairro;
+    private EditText edtCadastroUf;
+    private Bitmap imagem;
 
     private Pessoa pessoa;
     private Endereco endereco;
     private int mYear, mMonth, mDay;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
-    public PessoaHelper(final CadastroActivity activity){
+    public PessoaHelper(final Activity activity){
         edtCadastroNome = (EditText) activity.findViewById(R.id.edtCadastroNome);
         edtCadastroCelular = (EditText)activity.findViewById(R.id.edtCadastroCelular);
         edtCadastroDtNasc = (EditText) activity.findViewById(R.id.edtCadastroDtNasc);
@@ -53,46 +68,94 @@ public class PessoaHelper {
         edtCadastroComple = (EditText) activity.findViewById(R.id.edtCadastroComple);
         edtCadastroBairro = (EditText) activity.findViewById(R.id.edtCadastroBairro);
         edtCadastroCidade = (EditText) activity.findViewById(R.id.edtCadastroCidade);
+        edtCadastroUf = (EditText) activity.findViewById(R.id.edtCadastroUf);
 
         //Formata telefone
-        edtCadastroCelular .addTextChangedListener(new PhoneNumberFormattingTextWatcher());
+        if(edtCadastroCelular != null){
+            edtCadastroCelular .addTextChangedListener(new PhoneNumberFormattingTextWatcher());
+        }
 
         //Monta array do spinner para gênero
-        spinnerGenero.setOnItemSelectedListener(null);
-        montaListGenero(spinnerGenero,activity);
+        if(spinnerGenero != null){
+            spinnerGenero.setOnItemSelectedListener(null);
+            montaListGenero(spinnerGenero,activity);
+        }
 
         //Listener
-        edtCadastroDtNasc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                criaDialogDataNascimento(activity);
-            }
-        });
+        if(edtCadastroDtNasc != null){
+            edtCadastroDtNasc.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    criaDialogDataNascimento(activity);
+                }
+            });
+        }
+
+        if(edtCadastroCep != null){
+            edtCadastroCep.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    if(s.length() == 8){
+                        String cep = edtCadastroCep.getText().toString();
+                        buscaCep(cep);
+                    }
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                }
+            });
+        }
 
         pessoa = new Pessoa();
     }
 
+    public void setImagem(Bitmap img){
+        imagem = img;
+    }
 
-    public Pessoa getPessoa(){
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public Pessoa getPessoa() {
         pessoa.setNome(edtCadastroNome.getText().toString());
-       //pessoa.setDtNascimento(Date.valueOf(edtCadastroDtNasc.getText().toString()));
+        //pessoa.setDtnascimento(LocalDate.parse(edtCadastroDtNasc.getText()));
         pessoa.setGenero(spinnerGenero.getSelectedItem().toString().substring(0,1));
-        pessoa.setAltura(Float.valueOf(edtCadastroAltura.getText().toString()));
+        if(!edtCadastroAltura.getText().toString().isEmpty()){
+            pessoa.setAltura(BigDecimal.valueOf(Double.parseDouble(edtCadastroAltura.getText().toString())));
+        }
         pessoa.setTelefone(edtCadastroCelular.getText().toString());
         pessoa.setEmail(edtCadastroEmail.getText().toString());
         pessoa.setSenha(edtCadastroSenha.getText().toString());
-        pessoa.setEndereco(getEndereco());
+        pessoa.setEndereco(getDadosEndereco());
+        if(imagem != null){
+            pessoa.setFoto(getBytesFromBitmap(imagem));
+        }
         return pessoa;
     }
 
-    private Endereco getEndereco(){
+    private Endereco getDadosEndereco(){
+        endereco = new Endereco();
         endereco.setCep(edtCadastroCep.getText().toString());
         endereco.setLogradouro(edtCadastroRua.getText().toString());
         endereco.setNumero(edtCadastroNum.getText().toString());
         endereco.setComplemento(edtCadastroComple.getText().toString());
-        endereco.setCidade(edtCadastroCidade.getText().toString());
+        endereco.setBairro(edtCadastroBairro.getText().toString());
+        endereco.setLocalidade(edtCadastroCidade.getText().toString());
+        endereco.setUf(edtCadastroUf.getText().toString());
         return endereco;
 
+    }
+
+    private void setDadosEndereco(Endereco endereco){
+        edtCadastroCep.setText(endereco.getCep());
+        edtCadastroCidade.setText(endereco.getLocalidade());
+        edtCadastroBairro.setText(endereco.getBairro());
+        edtCadastroRua.setText(endereco.getLogradouro());
+        edtCadastroUf.setText(endereco.getUf());
     }
 
     public void montaListGenero(Spinner spinnerGenero, Activity activity){
@@ -132,4 +195,28 @@ public class PessoaHelper {
             }
         };
     }
+
+    private void buscaCep(String cep) {
+        Call<Endereco> call = new RetrofitCep().getEndereco().buscarEndereco(cep);
+        call.enqueue(new Callback<Endereco>() {
+            @Override
+            public void onResponse(Call<Endereco> call, Response<Endereco> response) {
+                endereco = new Endereco();
+                endereco = response.body();
+                setDadosEndereco(endereco);
+            }
+
+            @Override
+            public void onFailure(Call<Endereco> call, Throwable t) {
+                String messagem = t.getMessage();
+            }
+        });
+    }
+
+    public byte[] getBytesFromBitmap(Bitmap bitmap) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+        return stream.toByteArray();
+    }
+
 }

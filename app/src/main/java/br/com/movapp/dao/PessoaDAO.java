@@ -13,7 +13,7 @@ import br.com.movapp.model.Pessoa;
 
 public class PessoaDAO extends SQLiteOpenHelper {
     public PessoaDAO(Context context) {
-        super(context, "Pessoa", null, 2);
+        super(context, "movimente", null, 2);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class PessoaDAO extends SQLiteOpenHelper {
         dados.put("nome", pessoa.getNome());
        // dados.put("dtNascimento", pessoa.getDtNascimento().toString());
         dados.put("genero", pessoa.getGenero());
-        dados.put("altura", pessoa.getAltura());
+        dados.put("altura", pessoa.getAltura().doubleValue());
         dados.put("celular", pessoa.getTelefone());
         dados.put("email", pessoa.getEmail());
         dados.put("senha", pessoa.getSenha());

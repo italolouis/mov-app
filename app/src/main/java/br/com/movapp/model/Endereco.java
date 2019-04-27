@@ -1,15 +1,26 @@
 package br.com.movapp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.io.Serializable;
 
+@JsonIgnoreProperties({"ibge", "gia", "unidade"})
 public class Endereco implements Serializable {
+    private String cep;
     private String logradouro;
     private String numero;
     private String complemento;
     private String bairro;
-    private String cep;
-    private String cidade;
-    private String estado;
+    private String localidade;
+    private String uf;
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
 
     public String getLogradouro() {
         return logradouro;
@@ -43,27 +54,19 @@ public class Endereco implements Serializable {
         this.bairro = bairro;
     }
 
-    public String getCep() {
-        return cep;
+    public String getLocalidade() {
+        return localidade;
     }
 
-    public void setCep(String cep) {
-        this.cep = cep;
+    public void setLocalidade(String localidade) {
+        this.localidade = localidade;
     }
 
-    public String getCidade() {
-        return cidade;
+    public String getUf() {
+        return uf;
     }
 
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setUf(String uf) {
+        this.uf = uf;
     }
 }
