@@ -32,8 +32,9 @@ import java.util.Locale;
 
 import br.com.movapp.R;
 import br.com.movapp.dao.ImagemDAO;
-import br.com.movapp.helper.PessoaHelper;
-import br.com.movapp.model.Pessoa;
+import br.com.movapp.dao.UsuarioDAO;
+import br.com.movapp.helper.UsuarioHelper;
+import br.com.movapp.model.Usuario;
 import br.com.movapp.retrofit.RetrofitInicializador;
 import me.drakeet.materialdialog.MaterialDialog;
 import retrofit2.Call;
@@ -41,7 +42,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class CadastroActivity extends AppCompatActivity implements View.OnClickListener{
-    private PessoaHelper helper;
+    private UsuarioHelper helper;
     private Button btn_cadastro;
     private ImageView img_cadastro_photo;
     private Button btn_cadastro_photo;
@@ -57,7 +58,7 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
 
-        helper = new PessoaHelper(CadastroActivity.this);
+        helper = new UsuarioHelper(CadastroActivity.this);
 
         btn_cadastro = (Button) findViewById(R.id.btn_cadastro);
         btn_cadastro.setOnClickListener(CadastroActivity.this);
@@ -85,16 +86,16 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
                     imagemDAO.saveImagePath(selectedImagePath,dateTime);
 
                     retrieveImage = imagemDAO.getImagePath();
+
                     File newImageFile = new File(retrieveImage);
-
                     Picasso.with(CadastroActivity.this).load(Uri.fromFile(newImageFile)).into(img_cadastro_photo);
-
                 }
                 break;
 
             case CAPTURE_PHOTO:
                 if (resultCode == RESULT_OK) {
                     Bitmap bmp = imageReturnedIntent.getExtras().getParcelable("data");
+                    bmp = Bitmap.createScaledBitmap(bmp, img_cadastro_photo.getWidth(), img_cadastro_photo.getHeight(), true);
                     helper.setImagem(bmp);
                     img_cadastro_photo.setImageBitmap(bmp);
                 }
@@ -107,19 +108,17 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         if(v == btn_cadastro){
-            Pessoa pessoa = helper.getPessoa();
-            /*PessoaDAO pessoaDAO = new PessoaDAO(this);
-            pessoaDAO.inserePessoa(pessoa);
-            pessoaDAO.close();*/
+            final Usuario usuario = helper.getUsuario();
+            final UsuarioDAO usuarioDAO = new UsuarioDAO(this);
 
-            Call call = new RetrofitInicializador().getUsuarioSerice().insere(pessoa);
+            final Call<Usuario> call = new RetrofitInicializador().getUsuarioSerice().insere(usuario);
             //Metodo assimilar ao execute, mas vai fazer a execução assincrona
-            call.enqueue(new Callback() {
+            call.enqueue(new Callback<Usuario>() {
                 @Override
                 //Conseguiu conectar com o servidor
-                public void onResponse(Call call, Response response) {
+                public void onResponse(Call<Usuario> call, Response<Usuario> response) {
                     if(response.code() == 201){
-                        Log.i("onResponde", "Requisicao com sucesso");
+                        Log.i("onResponse", "Requisicao com sucesso");
                         Intent loginIntent = new Intent(CadastroActivity.this, LoginActivity.class);
                         CadastroActivity.this.startActivity(loginIntent);
                     }
@@ -127,7 +126,7 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
 
                 //Nao deu certo a execução
                 @Override
-                public void onFailure(Call call, Throwable t) {
+                public void onFailure(Call<Usuario> call, Throwable t) {
                     Log.e("onFailure", "Requisicao falhou");
                     Toast.makeText(CadastroActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                 }
@@ -160,8 +159,8 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
 
         ListView listView = new ListView(this);
         listView.setLayoutParams(new ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT));
+                img_cadastro_photo.getLayoutParams().width,
+                img_cadastro_photo.getLayoutParams().height));
         float scale = getResources().getDisplayMetrics().density;
         int dpAsPixels = (int) (8 * scale + 0.5f);
         listView.setPadding(0, dpAsPixels, 0, dpAsPixels);

@@ -15,24 +15,20 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-
-import java.io.ByteArrayOutputStream;
 import java.math.BigDecimal;
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import br.com.movapp.R;
 import br.com.movapp.model.Endereco;
-import br.com.movapp.model.Pessoa;
+import br.com.movapp.model.Usuario;
 import br.com.movapp.retrofit.RetrofitCep;
-import br.com.movapp.utils.MovUtils;
+import br.com.movapp.utils.ImageUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PessoaHelper {
+public class UsuarioHelper {
     private EditText edtCadastroNome;
     private EditText edtCadastroDtNasc;
     private Spinner spinnerGenero;
@@ -49,12 +45,12 @@ public class PessoaHelper {
     private EditText edtCadastroUf;
     private Bitmap imagem;
 
-    private Pessoa pessoa;
+    private Usuario usuario;
     private Endereco endereco;
     private int mYear, mMonth, mDay;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
-    public PessoaHelper(final Activity activity){
+    public UsuarioHelper(final Activity activity){
         edtCadastroNome = (EditText) activity.findViewById(R.id.edtCadastroNome);
         edtCadastroCelular = (EditText)activity.findViewById(R.id.edtCadastroCelular);
         edtCadastroDtNasc = (EditText) activity.findViewById(R.id.edtCadastroDtNasc);
@@ -112,7 +108,7 @@ public class PessoaHelper {
             });
         }
 
-        pessoa = new Pessoa();
+        usuario = new Usuario();
     }
 
     public void setImagem(Bitmap img){
@@ -120,21 +116,21 @@ public class PessoaHelper {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public Pessoa getPessoa() {
-        pessoa.setNome(edtCadastroNome.getText().toString());
-        //pessoa.setDtnascimento(LocalDate.parse(edtCadastroDtNasc.getText()));
-        pessoa.setGenero(spinnerGenero.getSelectedItem().toString().substring(0,1));
+    public Usuario getUsuario() {
+        usuario.setNome(edtCadastroNome.getText().toString());
+        //usuario.setDtnascimento(LocalDate.parse(edtCadastroDtNasc.getText()));
+        usuario.setGenero(spinnerGenero.getSelectedItem().toString().substring(0,1));
         if(!edtCadastroAltura.getText().toString().isEmpty()){
-            pessoa.setAltura(BigDecimal.valueOf(Double.parseDouble(edtCadastroAltura.getText().toString())));
+            usuario.setAltura(BigDecimal.valueOf(Double.parseDouble(edtCadastroAltura.getText().toString())));
         }
-        pessoa.setTelefone(edtCadastroCelular.getText().toString());
-        pessoa.setEmail(edtCadastroEmail.getText().toString());
-        pessoa.setSenha(edtCadastroSenha.getText().toString());
-        pessoa.setEndereco(getDadosEndereco());
+        usuario.setTelefone(edtCadastroCelular.getText().toString());
+        usuario.setEmail(edtCadastroEmail.getText().toString());
+        usuario.setSenha(edtCadastroSenha.getText().toString());
+        usuario.setEndereco(getDadosEndereco());
         if(imagem != null){
-            pessoa.setFoto(getBytesFromBitmap(imagem));
+            usuario.setFoto(ImageUtils.getBytesFromBitmap(imagem));
         }
-        return pessoa;
+        return usuario;
     }
 
     private Endereco getDadosEndereco(){
@@ -212,11 +208,4 @@ public class PessoaHelper {
             }
         });
     }
-
-    public byte[] getBytesFromBitmap(Bitmap bitmap) {
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
-        return stream.toByteArray();
-    }
-
 }

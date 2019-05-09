@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.Date;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Pessoa implements Serializable {
+public class Usuario implements Serializable {
     private Long codusu;
     private String nome;
     private LocalDate dtnascimento;

@@ -9,8 +9,8 @@ import com.google.firebase.messaging.RemoteMessage;
 import java.io.IOException;
 import java.util.Map;
 
-import br.com.movapp.dao.PessoaDAO;
-import br.com.movapp.dto.PessoaSync;
+import br.com.movapp.dao.UsuarioDAO;
+import br.com.movapp.dto.UsuarioSync;
 
 public class MovMessagingService extends FirebaseMessagingService {
 
@@ -31,9 +31,9 @@ public class MovMessagingService extends FirebaseMessagingService {
             ObjectMapper objectMapper = new ObjectMapper();
 
             try {
-                PessoaSync pessoaSync = objectMapper.readValue(json, PessoaSync.class);
-                PessoaDAO pessoaDAO = new PessoaDAO(this);
-                pessoaDAO.sincroniza(pessoaSync.getPessoas());
+                UsuarioSync usuarioSync = objectMapper.readValue(json, UsuarioSync.class);
+                UsuarioDAO usuarioDAO = new UsuarioDAO(this);
+                //usuarioDAO.sincroniza(usuarioSync.getUsuarios());
 
             } catch (IOException e) {
                 e.printStackTrace();

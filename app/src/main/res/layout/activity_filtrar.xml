@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="br.com.movapp.activity.FiltrarActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/ll_fieldset_buscar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/margin10"
+            android:paddingLeft="@dimen/margin10"
+            android:paddingRight="@dimen/margin10"
+            android:paddingTop="@dimen/margin10"
+            android:orientation="horizontal"
+            android:background="#242424">
+
+            <TextView
+                android:id="@+id/textViewFiltro"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Filtros"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColorHint="@color/colorWhite" />
+
+            <ImageView
+                android:id="@+id/imageViewBuscar"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:src="@drawable/ic_cross" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linListViews"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight= "1"
+                android:divider="#00000000"
+                android:dividerHeight="0dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Grupo Muscular"
+                    android:textStyle="bold"
+                    android:textColor="@color/coloBlack"
+                    android:paddingTop="@dimen/margin10"
+                    android:paddingBottom="@dimen/margin10"
+                    android:gravity="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <ListView
+                    android:id="@+id/listViewGrupo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight= "1"
+                    android:textColor="@color/coloBlack"
+                    android:cacheColorHint="#00000000"
+                    android:fadeScrollbars="false"
+                    android:choiceMode="multipleChoice">
+                </ListView>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight= "1"
+                android:divider="#00000000"
+                android:dividerHeight="0dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Equipamento"
+                    android:textStyle="bold"
+                    android:paddingTop="@dimen/margin10"
+                    android:paddingBottom="@dimen/margin10"
+                    android:gravity="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <ListView
+                    android:id="@+id/listViewEquipamentos"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight= "1"
+                    android:cacheColorHint="#00000000"
+                    android:fadeScrollbars="false"
+                    android:choiceMode="multipleChoice">
+                </ListView>
+            </LinearLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:layout_below="@+id/linListViews">
+
+        <Button
+            android:id="@+id/btn_filtrar"
+            style="?android:textAppearanceSmall"
+            android:textStyle="bold"
+            android:background="#07BE9F"
+            android:textColor="@color/colorWhite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="60dp"
+            android:gravity="center"
+            android:text="@string/action_filtrar" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+</RelativeLayout>
