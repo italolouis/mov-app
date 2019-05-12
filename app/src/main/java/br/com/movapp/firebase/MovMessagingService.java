@@ -9,8 +9,7 @@ import com.google.firebase.messaging.RemoteMessage;
 import java.io.IOException;
 import java.util.Map;
 
-import br.com.movapp.dao.UsuarioDAO;
-import br.com.movapp.dto.UsuarioSync;
+import br.com.movapp.database.Database;
 
 public class MovMessagingService extends FirebaseMessagingService {
 
@@ -25,21 +24,21 @@ public class MovMessagingService extends FirebaseMessagingService {
     }
 
     private void convertParaPessoa(Map<String, String> mensagem) {
-        String chaveDeAcesso = "pessoa";
+        /*String chaveDeAcesso = "pessoa";
         if(mensagem.containsKey(chaveDeAcesso)){
             String json = mensagem.get(chaveDeAcesso);
             ObjectMapper objectMapper = new ObjectMapper();
 
             try {
                 UsuarioSync usuarioSync = objectMapper.readValue(json, UsuarioSync.class);
-                UsuarioDAO usuarioDAO = new UsuarioDAO(this);
-                //usuarioDAO.sincroniza(usuarioSync.getUsuarios());
+                Database database = new Database(this);
+                //database.sincroniza(usuarioSync.getUsuarios());
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
-        }
+        }*/
 
     }
 }

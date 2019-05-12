@@ -17,7 +17,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -27,20 +26,14 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import br.com.movapp.R;
 import br.com.movapp.controller.LoginController;
-import br.com.movapp.dao.UsuarioDAO;
-import br.com.movapp.model.Usuario;
-import br.com.movapp.retrofit.RetrofitInicializador;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import br.com.movapp.controller.UsuarioController;
+import br.com.movapp.retrofit.ImportFromService;
 
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
@@ -61,7 +54,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
-    private UsuarioDAO usuarioDAO;
+    private UsuarioController usuarioController;
     private TextView mNovoUsuario;
     private Boolean resultado;
 
@@ -70,8 +63,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        usuarioDAO = new UsuarioDAO(this);
-        Boolean existeUsuario = usuarioDAO.existeUsuario();
+        ImportFromService.insetExerciciosFromService(this);
+
+        usuarioController = new UsuarioController(this);
+        Boolean existeUsuario = usuarioController.existeUsuario();
         if(existeUsuario){
             Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
             LoginActivity.this.startActivity(mainIntent);
@@ -285,7 +280,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * the user.
      */
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
-
         public final String mEmail;
         public final String mPassword;
 
@@ -296,7 +290,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            Boolean response = LoginController.autenticaLogin(usuarioDAO, mEmail, mPassword);
+            Boolean response = LoginController.autenticaLogin(usuarioController, mEmail, mPassword);
             return response;
         }
 
@@ -308,6 +302,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             if (success) {
                 Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
                 LoginActivity.this.startActivity(mainIntent);
+                finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();

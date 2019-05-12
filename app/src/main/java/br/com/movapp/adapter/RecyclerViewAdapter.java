@@ -3,7 +3,6 @@ package br.com.movapp.adapter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,17 +14,15 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import br.com.movapp.R;
-import br.com.movapp.model.DataModel;
-import br.com.movapp.utils.ImageUtils;
-
+import br.com.movapp.model.ViewExercicio;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
-    ArrayList<DataModel> mValues;
+    ArrayList<ViewExercicio> mValues;
     Context mContext;
     protected ItemListener mListener;
 
-    public RecyclerViewAdapter(Context context, ArrayList<DataModel> values, ItemListener itemListener) {
+    public RecyclerViewAdapter(Context context, ArrayList<ViewExercicio> values, ItemListener itemListener) {
         mValues = values;
         mContext = context;
         mListener=itemListener;
@@ -35,7 +32,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public TextView textView;
         public ImageView imageView;
         public RelativeLayout relativeLayout;
-        DataModel item;
+        ViewExercicio item;
 
         public ViewHolder(View v) {
 
@@ -45,19 +42,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             textView = (TextView) v.findViewById(R.id.textView);
             imageView = (ImageView) v.findViewById(R.id.imageView);
             relativeLayout = (RelativeLayout) v.findViewById(R.id.relativeLayout);
-
         }
 
-        public void setData(DataModel item) {
+        public void setData(ViewExercicio item) {
             this.item = item;
-
             textView.setText(item.text);
             if(item.drawable != null){
-                Bitmap foto = Bitmap.createScaledBitmap(BitmapFactory.decodeByteArray(item.drawable, 0, item.drawable.length), 300, 200, true);
-                imageView.setImageBitmap(foto);
+                imageView.setImageBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeByteArray(item.drawable, 0, item.drawable.length), 300, 200, true));
             }
         }
-
 
         @Override
         public void onClick(View view) {
@@ -69,9 +62,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public RecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
         View view = LayoutInflater.from(mContext).inflate(R.layout.view_exercicios_item, parent, false);
-
         return new ViewHolder(view);
     }
 
@@ -88,6 +79,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     public interface ItemListener {
-        void onItemClick(DataModel item);
+        void onItemClick(ViewExercicio item);
     }
 }

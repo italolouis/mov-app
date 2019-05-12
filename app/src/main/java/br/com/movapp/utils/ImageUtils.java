@@ -9,6 +9,9 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+
+import pl.droidsonroids.gif.GifDrawable;
 
 public class ImageUtils {
     public static byte[] getBytesFromBitmap(Bitmap bitmap) {
@@ -22,6 +25,22 @@ public class ImageUtils {
             return BitmapFactory.decodeByteArray(bytes, 0 ,bytes.length);
         }
         return null;
+    }
+
+    public static Bitmap resizeImage(byte [] image, int width, int height) {
+        Bitmap fotoResize = Bitmap.createScaledBitmap(ImageUtils.getBitmapFromBytes(image), width, height, true);
+        return fotoResize;
+    }
+
+    public static GifDrawable getGifFromBytes(byte[] bytes){
+        GifDrawable gif = null;
+        try {
+            gif = new GifDrawable(bytes);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return gif;
     }
 
     public static Bitmap getCroppedBitmap(Bitmap bitmap) {

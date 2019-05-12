@@ -18,7 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.FiltrarActivity"></activity>
+        <activity android:name=".activity.AdicionarExercicioActivity"></activity>
+        <activity android:name=".activity.ExercicioSelecionadoActivity" />
+        <activity android:name=".activity.FiltrarActivity" />
         <activity android:name=".activity.CadastroActivity" />
         <activity
             android:name=".activity.LoginActivity"

@@ -31,8 +31,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import br.com.movapp.R;
-import br.com.movapp.dao.ImagemDAO;
-import br.com.movapp.dao.UsuarioDAO;
+import br.com.movapp.database.Database;
 import br.com.movapp.helper.UsuarioHelper;
 import br.com.movapp.model.Usuario;
 import br.com.movapp.retrofit.RetrofitInicializador;
@@ -51,7 +50,6 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
     final private int REQUEST_CODE_WRITE_STORAGE = 1;
     private String retrieveImage;
     Uri uri;
-    ImagemDAO imagemDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,9 +65,6 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
         btn_cadastro_photo.setOnClickListener(CadastroActivity.this);
 
         img_cadastro_photo = (ImageView) findViewById(R.id.imageViewCadastro_photo);
-
-        imagemDAO = new ImagemDAO(CadastroActivity.this);
-        imagemDAO.open();
     }
 
     @Override
@@ -83,9 +78,9 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
                     String selectedImagePath = getPath(imageUri);
 
                     String dateTime = getCurrentTime();
-                    imagemDAO.saveImagePath(selectedImagePath,dateTime);
+                    //imagemDAO.saveImagePath(selectedImagePath,dateTime);
 
-                    retrieveImage = imagemDAO.getImagePath();
+                    //retrieveImage = imagemDAO.getImagePath();
 
                     File newImageFile = new File(retrieveImage);
                     Picasso.with(CadastroActivity.this).load(Uri.fromFile(newImageFile)).into(img_cadastro_photo);
@@ -109,7 +104,7 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         if(v == btn_cadastro){
             final Usuario usuario = helper.getUsuario();
-            final UsuarioDAO usuarioDAO = new UsuarioDAO(this);
+            final Database database = new Database(this);
 
             final Call<Usuario> call = new RetrofitInicializador().getUsuarioSerice().insere(usuario);
             //Metodo assimilar ao execute, mas vai fazer a execução assincrona

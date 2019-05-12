@@ -6,20 +6,14 @@
     <string name="prompt_password">Senha</string>
     <string name="label_nova_senha">Esqueçeu a senha?</string>
     <string name="action_sign_in">Entrar</string>
-
-    <string name="action_cadastrar">Cadastrar</string>
-    <string name="action_filtrar">Filtrar</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
     <string name="title_activity_main">MainActivity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
 
-    <!-- Strings related to Cadastro -->
+    <!-- Cadastro -->
     <string name="lblNovocadastro">Não possui uma conta? <b>Cadastre-se</b></string>
     <string name="lblCadastroNome">Nome</string>
     <string name="lblCadastroDtNascimento">Data de nascimento</string>
@@ -28,4 +22,42 @@
     <string name="lblCadastroCelular">Celular</string>
     <string name="lblCadastroEmail">E-mail</string>
     <string name="lblCadastroSenha">Senha</string>
+    <string name="action_cadastrar">Cadastrar</string>
+
+    <!--Exercicio -->
+    <string name="lblDiaSemana" >Dia da semana:</string>
+    <string name="lblTipoSerie">Tipo de série:</string>
+    <string name="lblNumSerie">Número de séries:</string>
+
+    <string-array name="dias_array">
+        <item>Segunda</item>
+        <item>Terça</item>
+        <item>Quarta</item>
+        <item>Quinta</item>
+        <item>Sexta</item>
+        <item>Sábado</item>
+        <item>Domingo</item>
+    </string-array>
+
+    <string-array name="tipoSerie_array">
+        <item>Selecione</item>
+        <item>Repetições</item>
+        <item>Carga</item>
+        <item>Repetições/Carga</item>
+        <item>Tempo em minutos</item>
+        <item>Tempo em segundos</item>
+    </string-array>
+
+    <string-array name="numSerie_array">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+    </string-array>
+
+    <!-- Filtros -->
+    <string name="action_filtrar">Filtrar</string>
 </resources>

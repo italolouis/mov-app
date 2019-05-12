@@ -2,6 +2,7 @@ package br.com.movapp.model;
 
 public class Exercicio {
     private Long cod;
+    private String nome;
     private String descricao;
     private byte[] image;
     private GrupoMuscular grupo;
@@ -13,6 +14,14 @@ public class Exercicio {
 
     public void setCod(Long cod) {
         this.cod = cod;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getDescricao() {

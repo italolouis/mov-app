@@ -1,43 +1,27 @@
-package br.com.movapp.dao;
+package br.com.movapp.controller;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.NonNull;
 
+import java.math.BigDecimal;
+
+import br.com.movapp.database.Database;
 import br.com.movapp.model.Usuario;
 
-public class UsuarioDAO extends SQLiteOpenHelper {
-    public UsuarioDAO(Context context) {
-        super(context, "movimente", null, 2);
+public class UsuarioController {
+    private Database database;
+
+    public UsuarioController(Context context){
+        database = new Database(context);
     }
 
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        String sql = "CREATE TABLE usuario(" +
-                "codusu INTEGER PRIMARY KEY, " +
-                "nome TEXT NOT NULL, "+
-                "foto BLOB NOT NULL, "+
-                "dtnascimento DATE, " +
-                "genero TEXT, " +
-                "altura NUMERIC, " +
-                "celular TEXT, " +
-                "email TEXT NOT NULL, " +
-                "senha TEXT, "+
-                "bloqueio TEXT);";
-        db.execSQL(sql);
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-    }
-
-    public void insere(Usuario usuario) {
-        SQLiteDatabase db = getWritableDatabase();
+    private void insere(Usuario usuario) {
+        SQLiteDatabase db = database.getWritableDatabase();
         ContentValues dados = getDadosPessoa(usuario);
-        db.insert("usuario", null, dados);
+        db.insert(Database.TABLE_USUARIO, null, dados);
     }
 
     @NonNull
@@ -46,38 +30,31 @@ public class UsuarioDAO extends SQLiteOpenHelper {
         dados.put("codusu", usuario.getCodusu());
         dados.put("foto", usuario.getFoto());
         dados.put("nome", usuario.getNome());
-       // dados.put("dtNascimento", usuario.getDtNascimento().toString());
+        // dados.put("dtNascimento", usuario.getDtNascimento().toString());
         dados.put("genero", usuario.getGenero());
         dados.put("altura", usuario.getAltura().doubleValue());
         dados.put("celular", usuario.getTelefone());
         dados.put("email", usuario.getEmail());
         dados.put("senha", usuario.getSenha());
-       // dados.put("bloqueio", usuario.getBloqueio());
+        // dados.put("bloqueio", usuario.getBloqueio());
         return dados;
     }
 
-    public boolean autenticaUsuario(String email, String senha) {
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor c = db.rawQuery("SELECT * FROM usuario WHERE email = ? AND senha = ?", new String[]{email,senha});
-        int resultados = c.getCount();
-        c.close();
-        return resultados > 0;
-    }
-
     public void deletaUsuarios() {
-        SQLiteDatabase db = getWritableDatabase();
+        SQLiteDatabase db = database.getWritableDatabase();
         db.delete("usuario", null, null);
     }
 
     public Usuario buscaUsuario() {
         Usuario usuario = new Usuario();
-        SQLiteDatabase db = getReadableDatabase();
+        SQLiteDatabase db = database.getReadableDatabase();
         Cursor c = db.rawQuery("SELECT * FROM usuario", null);
         if(c.moveToFirst()){
             usuario.setCodusu(c.getLong(c.getColumnIndex("codusu")));
             usuario.setNome(c.getString(c.getColumnIndex("nome")));
             usuario.setFoto(c.getBlob(c.getColumnIndex("foto")));
-
+            usuario.setGenero(c.getString(c.getColumnIndex("genero")));
+            usuario.setAltura(BigDecimal.valueOf(c.getInt(c.getColumnIndex("altura"))));
         }
         return usuario;
     }
@@ -91,7 +68,7 @@ public class UsuarioDAO extends SQLiteOpenHelper {
     }
 
     public boolean existeUsuario() {
-        SQLiteDatabase db = getReadableDatabase();
+        SQLiteDatabase db = database.getReadableDatabase();
         String existe = "SELECT codusu FROM usuario LIMIT 1";
         Cursor cursor = db.rawQuery(existe, null);
         int quantidade = cursor.getCount();
@@ -99,7 +76,7 @@ public class UsuarioDAO extends SQLiteOpenHelper {
     }
 
     private boolean existe(Usuario usuario) {
-        SQLiteDatabase db = getReadableDatabase();
+        SQLiteDatabase db = database.getReadableDatabase();
         String existe = "SELECT codusu FROM usuario WHERE codusu = ? LIMIT 1";
         Cursor cursor = db.rawQuery(existe, new String[]{String.valueOf(usuario.getCodusu())});
         int quantidade = cursor.getCount();
@@ -107,11 +84,11 @@ public class UsuarioDAO extends SQLiteOpenHelper {
     }
 
     public void altera(Usuario usuario) {
-        SQLiteDatabase db = getWritableDatabase();
+        SQLiteDatabase db = database.getWritableDatabase();
 
         ContentValues dados = getDadosPessoa(usuario);
 
         String[] params = {usuario.getCodusu().toString()};
-        db.update("usuario", dados, "codusu = ?", params);
+        db.update(Database.TABLE_USUARIO, dados, "codusu = ?", params);
     }
 }
