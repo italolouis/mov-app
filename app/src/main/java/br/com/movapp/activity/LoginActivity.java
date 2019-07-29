@@ -63,7 +63,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        ImportFromService.insetExerciciosFromService(this);
+        ImportFromService.inicializaGetFromService(this);
 
         usuarioController = new UsuarioController(this);
         Boolean existeUsuario = usuarioController.existeUsuario();

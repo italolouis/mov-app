@@ -42,7 +42,7 @@ public class UsuarioController {
 
     public void deletaUsuarios() {
         SQLiteDatabase db = database.getWritableDatabase();
-        db.delete("usuario", null, null);
+        db.delete(Database.TABLE_USUARIO, null, null);
     }
 
     public Usuario buscaUsuario() {
@@ -55,6 +55,16 @@ public class UsuarioController {
             usuario.setFoto(c.getBlob(c.getColumnIndex("foto")));
             usuario.setGenero(c.getString(c.getColumnIndex("genero")));
             usuario.setAltura(BigDecimal.valueOf(c.getInt(c.getColumnIndex("altura"))));
+        }
+        return usuario;
+    }
+
+    public Usuario buscaCodUsuario() {
+        Usuario usuario = new Usuario();
+        SQLiteDatabase db = database.getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT * FROM usuario", null);
+        if(c.moveToFirst()){
+            usuario.setCodusu(c.getLong(c.getColumnIndex("codusu")));
         }
         return usuario;
     }

@@ -1,5 +1,6 @@
 package br.com.movapp.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -15,7 +16,7 @@ import br.com.movapp.activity.fragments.TreinoFragment;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
     private BottomNavigationView bottomNavigation;
-
+    private int dataFiltro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +26,21 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         bottomNavigation = findViewById(R.id.bottom_navigation);
         bottomNavigation.setOnNavigationItemSelectedListener(this);
 
-        loadFragment(new HomeFragment());
+        if(!retornoAlterarFragment()){
+            loadFragment(new HomeFragment());
+        }
+    }
+
+    private boolean retornoAlterarFragment() {
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        if (extras != null){
+            dataFiltro = extras.getInt("FRAGMENT");
+            if(dataFiltro == 2){
+                return loadFragment(new ExerciciosFragment());
+            }
+        }
+        return false;
     }
 
     private boolean loadFragment(Fragment fragment){
@@ -58,7 +73,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                fragment = new ContaFragment();
                break;
        }
-
        return loadFragment(fragment);
     }
 }

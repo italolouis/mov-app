@@ -18,8 +18,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.AdicionarExercicioActivity"></activity>
-        <activity android:name=".activity.ExercicioSelecionadoActivity" />
+        <activity android:name=".activity.DescansoActivity"></activity>
+        <activity android:name=".activity.ExecutarExercicio" />
+        <activity
+            android:name=".activity.TreinoDiaActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.AdicionarExercicioActivity" />
         <activity android:name=".activity.FiltrarActivity" />
         <activity android:name=".activity.CadastroActivity" />
         <activity

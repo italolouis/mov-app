@@ -24,10 +24,11 @@
     <string name="lblCadastroSenha">Senha</string>
     <string name="action_cadastrar">Cadastrar</string>
 
-    <!--Exercicio -->
-    <string name="lblDiaSemana" >Dia da semana:</string>
+    <!--TipoExercicio -->
+    <string name="lblDiaSemana">Dia da semana:</string>
     <string name="lblTipoSerie">Tipo de série:</string>
     <string name="lblNumSerie">Número de séries:</string>
+    <string name="lblDescanso">Descanso:</string>
 
     <string-array name="dias_array">
         <item>Segunda</item>
@@ -60,4 +61,14 @@
 
     <!-- Filtros -->
     <string name="action_filtrar">Filtrar</string>
+
+    <string-array name="transport_list">
+        <item>Segunda</item>
+        <item>Terça</item>
+        <item>Quarta</item>
+        <item>Quinta</item>
+        <item>Sexta</item>
+        <item>Sábado</item>
+    </string-array>
+    <string name="title_activity_treino_dia">TreinoDiaActivity</string>
 </resources>

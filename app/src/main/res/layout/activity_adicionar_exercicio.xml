@@ -48,6 +48,7 @@
                     android:spinnerMode="dialog"
                     style="@style/Widget.AppCompat.Spinner.Underlined" />
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/form_num_serie"
                 android:layout_width="match_parent"
@@ -94,6 +95,30 @@
                     android:spinnerMode="dialog"
                     style="@style/Widget.AppCompat.Spinner.Underlined" />
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/form_descanso"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/form_tipo_serie">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lblDescanso"
+                    android:inputType="number"
+                    android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Subtitle"/>
+
+
+                <EditText
+                    android:id="@+id/edtDescansoSerie"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
         </RelativeLayout>
             <Button
                 android:id="@+id/addExercicio"

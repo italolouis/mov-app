@@ -147,11 +147,13 @@ public class UsuarioHelper {
     }
 
     private void setDadosEndereco(Endereco endereco){
-        edtCadastroCep.setText(endereco.getCep());
-        edtCadastroCidade.setText(endereco.getLocalidade());
-        edtCadastroBairro.setText(endereco.getBairro());
-        edtCadastroRua.setText(endereco.getLogradouro());
-        edtCadastroUf.setText(endereco.getUf());
+        if(endereco != null){
+            edtCadastroCep.setText(endereco.getCep());
+            edtCadastroCidade.setText(endereco.getLocalidade());
+            edtCadastroBairro.setText(endereco.getBairro());
+            edtCadastroRua.setText(endereco.getLogradouro());
+            edtCadastroUf.setText(endereco.getUf());
+        }
     }
 
     public void montaListGenero(Spinner spinnerGenero, Activity activity){

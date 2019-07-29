@@ -7,9 +7,14 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class Database extends SQLiteOpenHelper {
     private static final String NOME_BANCO = "movimente";
     public static final String TABLE_USUARIO = "usuario";
-    public static final String TABLE_GRUPO_MUSCULAR = "grupo_muscular";
-    public static final String TABLE_EQUIPAMENTO = "equipamento";
+    public static final String TABLE_CATEGORIA = "categoria";
+    public static final String TABLE_TIPOEXERCICIO_CATEGORIA = "tipoexercicio_categoria";
+    public static final String TABLE_TIPOEXERCICIO = "tipoexercicio";
+    public static final String TABLE_SERIE = "serie";
     public static final String TABLE_EXERCICIO = "exercicio";
+    public static final String TABLE_EXERCICIO_SERIE = "exercicio_serie";
+    public static final String TABLE_TREINO = "treino";
+    public static final String TABLE_TREINO_EXERCICIOS = "treino_exercicios";
 
     public Database(Context context) {
         super(context, NOME_BANCO, null, 2);
@@ -20,7 +25,7 @@ public class Database extends SQLiteOpenHelper {
         String tableUsuario = "CREATE TABLE " +TABLE_USUARIO+ "(" +
                 "codusu INTEGER PRIMARY KEY, " +
                 "nome TEXT NOT NULL, "+
-                "foto BLOB NOT NULL, "+
+                "foto BLOB , "+
                 "dtnascimento DATE, " +
                 "genero TEXT, " +
                 "altura NUMERIC, " +
@@ -30,26 +35,66 @@ public class Database extends SQLiteOpenHelper {
                 "bloqueio TEXT);";
         db.execSQL(tableUsuario);
 
-        String tableGrupo = "CREATE TABLE " +TABLE_GRUPO_MUSCULAR+ "(" +
-                "codgrupo INTEGER PRIMARY KEY, " +
-                "descricao TEXT);";
-        db.execSQL(tableGrupo);
+        String tableCategoria = "CREATE TABLE " +TABLE_CATEGORIA+ "(" +
+                "cod INTEGER PRIMARY KEY, " +
+                "nome TEXT, "+
+                "parentid INTEGER, "+
+                "foreign key (parentid) references "+ TABLE_CATEGORIA+ "(cod));";
+        db.execSQL(tableCategoria);
 
-        String tableEquipamento = "CREATE TABLE " +TABLE_EQUIPAMENTO+"(" +
-                "codequip INTEGER PRIMARY KEY, " +
-                "descricao TEXT);";
-        db.execSQL(tableEquipamento);
-
-        String tableExercicios = "CREATE TABLE " +TABLE_EXERCICIO+ "(" +
+        String tableTipoExercicios = "CREATE TABLE " +TABLE_TIPOEXERCICIO+ "(" +
                 "cod INTEGER PRIMARY KEY, " +
                 "nome VARCHAR(45), "+
-                "descricao TEXT, "+
-                "image BLOB, " +
-                "grupo INTEGER, " +
-                "equipamento INTEGER, "+
-                "FOREIGN KEY (grupo) REFERENCES " +TABLE_GRUPO_MUSCULAR +"(codgrupo), " +
-                "FOREIGN KEY (equipamento) REFERENCES " +TABLE_EQUIPAMENTO+"(codequip));";
-        db.execSQL(tableExercicios);
+                "instrucao TEXT, "+
+                "image BLOB);";
+        db.execSQL(tableTipoExercicios);
+
+        String tableTipoExercicioCatergoria = "CREATE TABLE " +TABLE_TIPOEXERCICIO_CATEGORIA+ "(" +
+                "tipexercicio INTEGER, " +
+                "categoriacod INTEGER, "+
+                "primary key (tipexercicio, categoriacod), "+
+                "foreign key (tipexercicio) references "+ TABLE_TIPOEXERCICIO + "(cod), " +
+                "foreign key (categoriacod) references "+ TABLE_CATEGORIA + "(cod));";
+        db.execSQL(tableTipoExercicioCatergoria);
+
+        String tableSerie = "CREATE TABLE " +TABLE_SERIE+ "(" +
+                "cod INTEGER, " +
+                "tipo TEXT, "+
+                "repeticao INTEGER, "+
+                "carga INTEGER, "+
+                "duracao INTEGER);";
+        db.execSQL(tableSerie);
+
+        String tableExercicio = "CREATE TABLE " +TABLE_EXERCICIO+ "(" +
+                "cod INTEGER, " +
+                "exerciciocod INTEGER, "+
+                "descanso INTEGER, "+
+                "foreign key (exerciciocod) references "+TABLE_EXERCICIO+  "(cod));";
+        db.execSQL(tableExercicio);
+
+        String tableExercicioSerie = "CREATE TABLE " +TABLE_EXERCICIO_SERIE+ "(" +
+                "exerciciocod INTEGER, " +
+                "seriecod INTEGER, "+
+                "foreign key (exerciciocod) references "+ TABLE_EXERCICIO+ "(cod) ,"+
+                "foreign key (seriecod) references "+TABLE_SERIE+ "(cod));";
+        db.execSQL(tableExercicioSerie);
+
+        String tableTreino = "CREATE TABLE " +TABLE_TREINO+ "(" +
+                "cod INTEGER, " +
+                "dia TEXT, "+
+                "usuariocod INTEGER, "+
+                "exercicioscod INTEGER, "+
+                "primary key (usuariocod, exercicioscod), "+
+                "foreign key (usuariocod) references "+ TABLE_USUARIO+ "(codusu) ,"+
+                "foreign key (exercicioscod) references "+TABLE_EXERCICIO+ "(cod));";
+        db.execSQL(tableTreino);
+
+        String tableTreinoExercicios = "CREATE TABLE " +TABLE_TREINO_EXERCICIOS+ "(" +
+                "treinocod INTEGER, " +
+                "exercicioscod TEXT, "+
+                "foreign key (treinocod) references "+ TABLE_TREINO+ "(cod) ,"+
+                "foreign key (exercicioscod) references "+TABLE_EXERCICIO+ "(cod));";
+        db.execSQL(tableTreinoExercicios);
     }
 
     @Override

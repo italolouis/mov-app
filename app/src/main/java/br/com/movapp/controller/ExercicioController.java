@@ -6,28 +6,32 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import br.com.movapp.database.Database;
 import br.com.movapp.model.Exercicio;
+import br.com.movapp.model.Serie;
 
 public class ExercicioController {
     private Database database;
+    private SerieController serieController;
 
     public ExercicioController(Context context){
         database = new Database(context);
+        serieController = new SerieController(context);
     }
 
     public void insereExercicio(Exercicio exercicio) {
-        if(existe(exercicio)){
-            altera(exercicio);
+        if(existeExercicio(exercicio)){
+            alteraExercicio(exercicio);
         }else{
-            insere(exercicio);
+            insereTabelaExercicio(exercicio);
         }
     }
 
-    private void altera(Exercicio exercicio) {
+    private void alteraExercicio(Exercicio exercicio) {
         SQLiteDatabase db = database.getWritableDatabase();
 
         ContentValues dados = getDadosExercicio(exercicio);
@@ -36,7 +40,7 @@ public class ExercicioController {
         db.update(Database.TABLE_EXERCICIO, dados, "cod = ?", params);
     }
 
-    private boolean existe(Exercicio exercicio) {
+    private boolean existeExercicio(Exercicio exercicio) {
         SQLiteDatabase db = database.getReadableDatabase();
         String existe = "SELECT cod FROM "+Database.TABLE_EXERCICIO+ " WHERE cod = ? LIMIT 1";
         Cursor cursor = db.rawQuery(existe, new String[]{String.valueOf(exercicio.getCod())});
@@ -44,42 +48,45 @@ public class ExercicioController {
         return quantidade > 0;
     }
 
-    private void insere(Exercicio exercicio) {
+    private void insereTabelaExercicio(Exercicio exercicio) {
         SQLiteDatabase db = database.getWritableDatabase();
         ContentValues dados = getDadosExercicio(exercicio);
         db.insert(Database.TABLE_EXERCICIO, null, dados);
+
+        inserTabelaExercicioSerie(dados.getAsLong("cod"));
     }
 
+    public void inserTabelaExercicioSerie(Long exercicioCod){
+        SQLiteDatabase db = database.getWritableDatabase();
+        List<Serie> series = serieController.buscarSeries();
+        for (Serie serie : series){
+            ContentValues dados = new ContentValues();
+            dados.put("exerciciocod", exercicioCod);
+            dados.put("seriecod", serie.getCod());
+            db.insert(Database.TABLE_EXERCICIO_SERIE, null, dados);
+        }
+    }
 
     @NonNull
     private ContentValues getDadosExercicio(Exercicio exercicio) {
         ContentValues dados = new ContentValues();
         dados.put("cod", exercicio.getCod());
-        dados.put("nome", exercicio.getNome());
-        dados.put("descricao", exercicio.getDescricao());
-        dados.put("image", exercicio.getImage());
-        if(exercicio.getGrupo()!= null){
-            dados.put("grupo", exercicio.getGrupo().getCodgrupo());
-            dados.put("equipamento", exercicio.getEquipamento().getCodequip());
-        }
+        dados.put("exerciciocod", exercicio.getExerciciocod());
+        dados.put("descanso", exercicio.getDescanso());
         return dados;
     }
 
-    public List<Exercicio> buscarExercicios(){
+    public Set<Exercicio> buscarExercicioInserido(Long codExercicio){
         SQLiteDatabase db = database.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM  " + Database.TABLE_EXERCICIO, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM  " + Database.TABLE_EXERCICIO + " WHERE cod = ? ", new String[]{String.valueOf(codExercicio)});
 
-        List<Exercicio> arrayExercios = new ArrayList<>();
+        Set<Exercicio> setExercicio = new HashSet<>();
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 do {
                     Exercicio exercicio = new Exercicio();
                     exercicio.setCod(cursor.getLong(cursor.getColumnIndex("cod")));
-                    exercicio.setNome(cursor.getString(cursor.getColumnIndex("nome")));
-                    exercicio.setDescricao(cursor.getString(cursor.getColumnIndex("descricao")));
-                    exercicio.setImage(cursor.getBlob(cursor.getColumnIndex("image")));
-                    //exercicio.setGrupo(cursor.getInt(cursor.getColumnIndex("grupo")));
-                    arrayExercios.add(exercicio);
+                    setExercicio.add(exercicio);
                 } while (cursor.moveToNext());
             }
             cursor.close();
@@ -88,21 +95,7 @@ public class ExercicioController {
         cursor.close();
         db.close();
 
-        return arrayExercios;
+        return setExercicio;
     }
 
-
-    public Exercicio buscaExercicio(Long cod) {
-        Exercicio exercicio = new Exercicio();
-        SQLiteDatabase db = database.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM exercicio WHERE cod = ?", new String[]{String.valueOf(cod)});
-        if(cursor.moveToFirst()){
-            exercicio.setCod(cursor.getLong(cursor.getColumnIndex("cod")));
-            exercicio.setNome(cursor.getString(cursor.getColumnIndex("nome")));
-            exercicio.setDescricao(cursor.getString(cursor.getColumnIndex("descricao")));
-            exercicio.setImage(cursor.getBlob(cursor.getColumnIndex("image")));
-
-        }
-        return exercicio;
-    }
 }

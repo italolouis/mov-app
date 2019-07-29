@@ -1,12 +1,16 @@
 package br.com.movapp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.util.Set;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Exercicio {
     private Long cod;
-    private String nome;
-    private String descricao;
-    private byte[] image;
-    private GrupoMuscular grupo;
-    private Equipamento equipamento;
+    private Long exerciciocod;
+    private TipoExercicio tipoExercicios;
+    private Set<Serie> series;
+    private Long descanso;
 
     public Long getCod() {
         return cod;
@@ -16,43 +20,36 @@ public class Exercicio {
         this.cod = cod;
     }
 
-    public String getNome() {
-        return nome;
+    public Long getExerciciocod() {
+        return exerciciocod;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setExerciciocod(Long exerciciocod) {
+        this.exerciciocod = exerciciocod;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public Set<Serie> getSeries() {
+        return series;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setSeries(Set<Serie> series) {
+        this.series = series;
     }
 
-    public byte[] getImage() {
-        return image;
+    public TipoExercicio getTipoExercicios() {
+        return tipoExercicios;
     }
 
-    public void setImage(byte[] image) {
-        this.image = image;
+    public void setTipoExercicios(TipoExercicio tipoExercicios) {
+        this.tipoExercicios = tipoExercicios;
     }
 
-    public GrupoMuscular getGrupo() {
-        return grupo;
+    public Long getDescanso() {
+        return descanso;
     }
 
-    public void setGrupo(GrupoMuscular grupo) {
-        this.grupo = grupo;
+    public void setDescanso(Long descanso) {
+        this.descanso = descanso;
     }
 
-    public Equipamento getEquipamento() {
-        return equipamento;
-    }
-
-    public void setEquipamento(Equipamento equipamento) {
-        this.equipamento = equipamento;
-    }
 }

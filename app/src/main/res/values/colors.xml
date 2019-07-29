@@ -7,5 +7,6 @@
     <color name="colorFacebook">#4267B2</color>
     <color name="colorVerde">#07BE9F</color>
     <color name="coloBlack">#242424</color>
+    <color name="colorActiveItem">#4400a59c</color>
 
 </resources>

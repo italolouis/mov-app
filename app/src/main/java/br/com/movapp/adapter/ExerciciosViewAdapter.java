@@ -16,13 +16,13 @@ import java.util.ArrayList;
 import br.com.movapp.R;
 import br.com.movapp.model.ViewExercicio;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
+public class ExerciciosViewAdapter extends RecyclerView.Adapter<ExerciciosViewAdapter.ViewHolder> {
 
     ArrayList<ViewExercicio> mValues;
     Context mContext;
     protected ItemListener mListener;
 
-    public RecyclerViewAdapter(Context context, ArrayList<ViewExercicio> values, ItemListener itemListener) {
+    public ExerciciosViewAdapter(Context context, ArrayList<ViewExercicio> values, ItemListener itemListener) {
         mValues = values;
         mContext = context;
         mListener=itemListener;
@@ -61,7 +61,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     @Override
-    public RecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ExerciciosViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.view_exercicios_item, parent, false);
         return new ViewHolder(view);
     }

@@ -10,34 +10,29 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import br.com.movapp.activity.AdicionarExercicioActivity;
-import br.com.movapp.activity.CadastroActivity;
 import br.com.movapp.activity.FiltrarActivity;
-import br.com.movapp.activity.LoginActivity;
-import br.com.movapp.controller.ExercicioController;
-import br.com.movapp.model.Exercicio;
-import br.com.movapp.retrofit.ImportFromService;
+import br.com.movapp.controller.TipoExercicioController;
+import br.com.movapp.model.TipoExercicio;
 import br.com.movapp.utils.AutoFitGrid;
 import br.com.movapp.R;
-import br.com.movapp.adapter.RecyclerViewAdapter;
+import br.com.movapp.adapter.ExerciciosViewAdapter;
 import br.com.movapp.model.ViewExercicio;
 
-public class ExerciciosFragment extends Fragment implements RecyclerViewAdapter.ItemListener, View.OnClickListener{
+public class ExerciciosFragment extends Fragment implements ExerciciosViewAdapter.ItemListener, View.OnClickListener{
     private RecyclerView recyclerView;
     private ImageView imageViewBuscar;
     private ImageView imageViewFiltrar;
-    public ExercicioController exercicioController;
+    public TipoExercicioController tipoExercicioController;
 
-    @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_exercicios, container, false);
-        exercicioController = new ExercicioController(getContext());
+        tipoExercicioController = new TipoExercicioController(getContext());
 
         imageViewBuscar = (ImageView) view.findViewById(R.id.imageViewBuscar);
 
@@ -46,22 +41,22 @@ public class ExerciciosFragment extends Fragment implements RecyclerViewAdapter.
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
 
-        List<Exercicio> exercicios = exercicioController.buscarExercicios();
-        if(!exercicios.isEmpty()){
-            setRecicleViewAdapter(exercicios, container);
+        List<TipoExercicio> tipoExercicios = tipoExercicioController.buscarExercicios();
+        if(!tipoExercicios.isEmpty()){
+            setRecicleViewAdapter(tipoExercicios, container);
         }
         return view;
     }
 
 
-    private void setRecicleViewAdapter(List<Exercicio> exercicios, @Nullable ViewGroup container) {
-        if (exercicios != null) {
+    private void setRecicleViewAdapter(List<TipoExercicio> tipoExercicios, @Nullable ViewGroup container) {
+        if (tipoExercicios != null) {
             ArrayList<ViewExercicio> arrayList = new ArrayList<>();
-            for (Exercicio exercicio : exercicios) {
-                arrayList.add(new ViewExercicio(exercicio.getCod(), exercicio.getNome(), exercicio.getImage(), "#09A9FF"));
+            for (TipoExercicio tipoExercicio : tipoExercicios) {
+                arrayList.add(new ViewExercicio(tipoExercicio.getCod(), tipoExercicio.getNome(), tipoExercicio.getImage(), "#09A9FF"));
             }
 
-            RecyclerViewAdapter adapter = new RecyclerViewAdapter(container.getContext(), arrayList, this);
+            ExerciciosViewAdapter adapter = new ExerciciosViewAdapter(container.getContext(), arrayList, this);
             recyclerView.setAdapter(adapter);
 
             /**
@@ -77,7 +72,6 @@ public class ExerciciosFragment extends Fragment implements RecyclerViewAdapter.
         Intent adicionarExercicio = new Intent(getActivity(), AdicionarExercicioActivity.class);
         adicionarExercicio.putExtra("CODEXERCICIO", item.id);
         getActivity().startActivity(adicionarExercicio);
-
     }
 
     @Override

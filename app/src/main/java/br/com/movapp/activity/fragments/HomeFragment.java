@@ -35,8 +35,10 @@ public class HomeFragment extends Fragment {
         textHomeBemVindo.setText(getMessageWelcome(usuario).concat(usuario.getNome()));
 
         imageViewProfile = (ImageView) view.findViewById(R.id.imageViewProfile);
-        Bitmap fotoProfile = ImageUtils.resizeImage(usuario.getFoto(), imageViewProfile.getLayoutParams().width+100, imageViewProfile.getLayoutParams().height+180);
-        imageViewProfile.setImageBitmap(ImageUtils.getCroppedBitmap(fotoProfile));
+        if(usuario.getFoto() != null){
+            Bitmap fotoProfile = ImageUtils.resizeImage(usuario.getFoto(), imageViewProfile.getLayoutParams().width+100, imageViewProfile.getLayoutParams().height+180);
+            imageViewProfile.setImageBitmap(ImageUtils.getCroppedBitmap(fotoProfile));
+        }
 
         textViewTreino = (TextView) view.findViewById(R.id.textViewTreino);
         textViewTreino.setText(DateUtils.getDayOfWeek());

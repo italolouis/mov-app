@@ -12,8 +12,8 @@
         android:id="@+id/form_perfil"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorWhite"
-        android:background="@drawable/shape">
+        android:background="@drawable/shape"
+        android:backgroundTint="@color/colorWhite">
 
         <ImageView
             android:id="@+id/imageViewProfile"

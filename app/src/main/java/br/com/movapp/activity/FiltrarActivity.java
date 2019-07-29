@@ -1,102 +1,100 @@
 package br.com.movapp.activity;
 
+import android.content.Context;
+import android.content.Intent;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.util.SparseBooleanArray;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.CheckedTextView;
+import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.TextView;
 
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import br.com.movapp.R;
-import br.com.movapp.model.Equipamento;
-import br.com.movapp.model.GrupoMuscular;
-import br.com.movapp.retrofit.RetrofitInicializador;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import br.com.movapp.activity.fragments.ExerciciosFragment;
+import br.com.movapp.activity.fragments.HomeFragment;
+import br.com.movapp.adapter.CategoriaViewAdapter;
+import br.com.movapp.helper.CategoriaHelper;
 
-public class FiltrarActivity extends AppCompatActivity {
-    private ListView listViewGrupo ;
-    private ListView  listViewEquipamentos;
-
-    SparseBooleanArray sparseBooleanArray ;
+public class FiltrarActivity extends AppCompatActivity implements View.OnClickListener {
+    private CategoriaViewAdapter adapter;
+    private ExpandableListView categoriesList;
+    private ArrayList<CategoriaHelper> categories;
+    protected Context mContext;
+    private ImageView imgViewFecharFiltro;
+    private Fragment mFragment = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filtrar);
 
-        listViewGrupo = (ListView)findViewById(R.id.listViewGrupo);
-        popularGrupos();
+        new CategoriaHelper(this);
+        mContext = this;
 
-        listViewEquipamentos= (ListView)findViewById(R.id.listViewEquipamentos);
-        popularEquipamentos();
+        imgViewFecharFiltro = (ImageView)findViewById(R.id.imgViewFecharFiltro);
+        imgViewFecharFiltro.setOnClickListener(this);
 
-        listViewGrupo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        categoriesList = (ExpandableListView)findViewById(R.id.categories);
+        categories = CategoriaHelper.getCategories();
+        adapter = new CategoriaViewAdapter(this, categories, categoriesList);
+        categoriesList.setAdapter(adapter);
+
+        categoriesList.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(FiltrarActivity.this, "ListView Selected Values = " +  Long.toString(id) ,  Toast.LENGTH_LONG).show();
-            }
-        });
-
-        listViewEquipamentos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(FiltrarActivity.this, "ListView Selected Values = " +  Long.toString(id) ,  Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
-    private void popularGrupos() {
-        Call<List<GrupoMuscular>> call = new RetrofitInicializador().getGrupoSerice().getGrupos();
-        call.enqueue(new Callback<List<GrupoMuscular>>() {
-            @Override
-            //Conseguiu conectar com o servidor
-            public void onResponse(Call<List<GrupoMuscular>>  call, Response<List<GrupoMuscular>> response) {
-                List<GrupoMuscular> myList = response.body();
-                ArrayAdapter<GrupoMuscular> adapter = new ArrayAdapter<GrupoMuscular>
-                        (FiltrarActivity.this,
-                                android.R.layout.simple_list_item_multiple_choice,
-                                android.R.id.text1, myList);
-
-                listViewGrupo.setAdapter(adapter);
-            }
-
-            //Nao deu certo a execução
-            @Override
-            public void onFailure(Call<List<GrupoMuscular>> call, Throwable t) {
-                Log.e("onFailure", "Requisicao falhou");
-                Toast.makeText(FiltrarActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            public boolean onChildClick(ExpandableListView parent, View v,
+                                        int groupPosition, int childPosition, long id) {
+                return viewSubcategorias(v, groupPosition);
             }
         });
     }
 
-    private void popularEquipamentos() {
-        Call<List<Equipamento>> call = new RetrofitInicializador().getEquipamentoService().getEquipamentos();
-        call.enqueue(new Callback<List<Equipamento>>() {
-            @Override
-            //Conseguiu conectar com o servidor
-            public void onResponse(Call<List<Equipamento>>  call, Response<List<Equipamento>> response) {
-                List<Equipamento> myList = response.body();
-                ArrayAdapter<Equipamento> adapter = new ArrayAdapter<Equipamento>
-                        (FiltrarActivity.this,
-                                android.R.layout.simple_list_item_multiple_choice,
-                                android.R.id.text1, myList);
+    private boolean viewSubcategorias(View v, int groupPosition) {
+        CheckedTextView checkbox = (CheckedTextView)v.findViewById(R.id.list_item_text_child);
+        checkbox.toggle();
 
-                listViewEquipamentos.setAdapter(adapter);
-            }
+        View parentView = categoriesList.findViewWithTag(categories.get(groupPosition).name);
+        if(parentView != null) {
+            TextView sub = (TextView)parentView.findViewById(R.id.list_item_text_subscriptions);
 
-            //Nao deu certo a execução
-            @Override
-            public void onFailure(Call<List<Equipamento>> call, Throwable t) {
-                Log.e("onFailure", "Requisicao falhou");
-                Toast.makeText(FiltrarActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            if(sub != null) {
+                CategoriaHelper category = categories.get(groupPosition);
+                if(checkbox.isChecked()) {
+                    category.selection.add(checkbox.getText().toString());
+                    Collections.sort(category.selection, new CustomComparator());
+                }
+                else {
+                    category.selection.remove(checkbox.getText().toString());
+                }
+
+                sub.setText(category.selection.toString());
             }
-        });
+        }
+        return true;
     }
+
+    @Override
+    public void onClick(View v) {
+        if(v == imgViewFecharFiltro){
+            Intent mainIntent = new Intent(FiltrarActivity.this, MainActivity.class);
+            mainIntent.putExtra("FRAGMENT", 2);
+            FiltrarActivity.this.startActivity(mainIntent);
+        }
+
+    }
+
+    public class CustomComparator implements Comparator<String> {
+        @Override
+        public int compare(String o1, String o2) {
+            return o1.compareTo(o2);
+        }
+    }
+
 }

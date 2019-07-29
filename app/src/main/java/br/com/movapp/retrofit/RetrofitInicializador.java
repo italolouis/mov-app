@@ -1,9 +1,11 @@
 package br.com.movapp.retrofit;
 
+import br.com.movapp.services.CategoriaService;
 import br.com.movapp.services.DispositivoService;
-import br.com.movapp.services.EquipamentoService;
 import br.com.movapp.services.ExercicioService;
-import br.com.movapp.services.GrupoService;
+import br.com.movapp.services.SerieService;
+import br.com.movapp.services.TipoExercicioService;
+import br.com.movapp.services.TreinoService;
 import br.com.movapp.services.UsuarioService;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -33,16 +35,24 @@ public class RetrofitInicializador {
         return retrofit.create(UsuarioService.class);
     }
 
-    public GrupoService getGrupoSerice() {
-        return retrofit.create(GrupoService.class);
+    public TipoExercicioService getTipoExercicioService() {
+        return retrofit.create(TipoExercicioService.class);
     }
 
-    public EquipamentoService getEquipamentoService() {
-        return retrofit.create(EquipamentoService.class);
+    public CategoriaService getCategoriasService() {
+        return retrofit.create(CategoriaService.class);
     }
 
-    public ExercicioService getExercicioService() {
+    public ExercicioService getExercicioService(){
         return retrofit.create(ExercicioService.class);
+    }
+
+    public TreinoService getTreinoService(){
+        return retrofit.create(TreinoService.class);
+    }
+
+    public SerieService getSerieService() {
+        return retrofit.create(SerieService.class);
     }
     public DispositivoService getDispositivoService() {
         return retrofit.create(DispositivoService.class);

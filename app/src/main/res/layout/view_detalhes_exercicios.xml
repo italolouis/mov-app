@@ -28,6 +28,6 @@
         android:paddingBottom="@dimen/action_button_height"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Esse exercicio deverá ser realizado...." />
+        android:text="Esse tipoExercicio deverá ser realizado...." />
 
 </LinearLayout>
