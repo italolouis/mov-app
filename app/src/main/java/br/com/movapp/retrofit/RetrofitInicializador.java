@@ -25,7 +25,7 @@ public class RetrofitInicializador {
         client.addInterceptor(interceptor);
 
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.0.10:8080/")
+                .baseUrl("https://mov-api.herokuapp.com/")
                 .addConverterFactory(JacksonConverterFactory.create())
                 .client(client.build())
                 .build();

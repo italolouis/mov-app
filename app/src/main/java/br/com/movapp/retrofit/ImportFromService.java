@@ -102,7 +102,7 @@ public class ImportFromService {
             public void onResponse(Call<List<Serie>>  call, Response<List<Serie>> response) {
                 List<Serie> series = response.body();
                 SerieController serieController= new SerieController(context);
-                if(!series.isEmpty()){
+                if(series != null){
                     for (Serie serie: series){
                         serieController.insereSerie(serie);
                     }
