@@ -1,0 +1,297 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="br.com.movapp"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="19"
+8-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="28" />
+9-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml
+10    <!-- To auto-complete the email text field in the login form with the user's emails -->
+11    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+11-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:6:5-71
+11-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:6:22-68
+12    <uses-permission android:name="android.permission.READ_PROFILE" />
+12-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:7:5-71
+12-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:7:22-68
+13    <uses-permission android:name="android.permission.READ_CONTACTS" />
+13-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:8:5-72
+13-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:8:22-69
+14    <uses-permission android:name="android.permission.INTERNET" />
+14-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:9:5-67
+14-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:9:22-64
+15    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+15-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:10:5-79
+15-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:10:22-76
+16    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+16-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:11:5-81
+16-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:11:22-78
+17
+18    <!-- Include required permissions for Google Maps API to run. -->
+19    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+19-->[com.google.android.gms:play-services-maps:16.0.0] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\f8c41fa27dcf92821aea997020c65b25\play-services-maps-16.0.0\AndroidManifest.xml:23:5-79
+19-->[com.google.android.gms:play-services-maps:16.0.0] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\f8c41fa27dcf92821aea997020c65b25\play-services-maps-16.0.0\AndroidManifest.xml:23:22-76
+20
+21    <uses-feature
+21-->[com.google.android.gms:play-services-maps:16.0.0] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\f8c41fa27dcf92821aea997020c65b25\play-services-maps-16.0.0\AndroidManifest.xml:26:5-28:35
+22        android:glEsVersion="0x00020000"
+22-->[com.google.android.gms:play-services-maps:16.0.0] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\f8c41fa27dcf92821aea997020c65b25\play-services-maps-16.0.0\AndroidManifest.xml:27:9-41
+23        android:required="true" />
+23-->[com.google.android.gms:play-services-maps:16.0.0] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\f8c41fa27dcf92821aea997020c65b25\play-services-maps-16.0.0\AndroidManifest.xml:28:9-32
+24
+25    <uses-permission android:name="android.permission.WAKE_LOCK" />
+25-->[com.google.firebase:firebase-measurement-connector-impl:17.0.2] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\09e8ed763e3c570e516fb58d3a9eaf94\firebase-measurement-connector-impl-17.0.2\AndroidManifest.xml:24:5-68
+25-->[com.google.firebase:firebase-measurement-connector-impl:17.0.2] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\09e8ed763e3c570e516fb58d3a9eaf94\firebase-measurement-connector-impl-17.0.2\AndroidManifest.xml:24:22-65
+26    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" /> <!-- Required by older versions of Google Play services to create IID tokens -->
+26-->[com.google.firebase:firebase-analytics:16.0.4] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\3a60dc51969e059207963f992fd10ce9\firebase-analytics-16.0.4\AndroidManifest.xml:26:5-110
+26-->[com.google.firebase:firebase-analytics:16.0.4] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\3a60dc51969e059207963f992fd10ce9\firebase-analytics-16.0.4\AndroidManifest.xml:26:22-107
+27    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+27-->[com.google.firebase:firebase-iid:17.0.3] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\823aba5c451378b9ed92d5bbbc38d65f\firebase-iid-17.0.3\AndroidManifest.xml:26:5-82
+27-->[com.google.firebase:firebase-iid:17.0.3] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\823aba5c451378b9ed92d5bbbc38d65f\firebase-iid-17.0.3\AndroidManifest.xml:26:22-79
+28
+29    <application
+29-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:13:5-54:19
+30        android:allowBackup="true"
+30-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:14:9-35
+31        android:appComponentFactory="android.support.v4.app.CoreComponentFactory"
+31-->[com.android.support:support-compat:28.0.0] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\b6a2a1baab24083210f6c87e8b2e2539\support-compat-28.0.0\AndroidManifest.xml:22:18-91
+32        android:debuggable="true"
+33        android:icon="@mipmap/ic_launcher"
+33-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:15:9-43
+34        android:label="@string/app_name"
+34-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:16:9-41
+35        android:roundIcon="@mipmap/ic_launcher_round"
+35-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:17:9-54
+36        android:supportsRtl="true"
+36-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:18:9-35
+37        android:theme="@style/AppTheme"
+37-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:19:9-40
+38        android:usesCleartextTraffic="true" >
+38-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:20:9-44
+39        <activity android:name="br.com.movapp.activity.DescansoActivity" />
+39-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:21:9-72
+39-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:21:19-60
+40        <activity android:name="br.com.movapp.activity.ExecutarExercicio" />
+40-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:22:9-64
+40-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:22:19-61
+41        <activity
+41-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:23:9-26:59
+42            android:name="br.com.movapp.activity.TreinoDiaActivity"
+42-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:24:13-55
+43            android:label="@string/app_name"
+43-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:25:13-45
+44            android:theme="@style/AppTheme.NoActionBar" />
+44-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:26:13-56
+45        <activity android:name="br.com.movapp.activity.AdicionarExercicioActivity" />
+45-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:27:9-73
+45-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:27:19-70
+46        <activity android:name="br.com.movapp.activity.FiltrarActivity" />
+46-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:28:9-62
+46-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:28:19-59
+47        <activity android:name="br.com.movapp.activity.CadastroActivity" />
+47-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:29:9-63
+47-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:29:19-60
+48        <activity
+48-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:30:9-38:20
+49            android:name="br.com.movapp.activity.LoginActivity"
+49-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:31:13-51
+50            android:label="@string/app_name" >
+50-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:32:13-45
+51            <intent-filter>
+51-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:33:13-37:29
+52                <action android:name="android.intent.action.MAIN" />
+52-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:34:17-69
+52-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:34:25-66
+53
+54                <category android:name="android.intent.category.LAUNCHER" />
+54-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:36:17-77
+54-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:36:27-74
+55            </intent-filter>
+56        </activity>
+57        <activity
+57-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:39:9-42:46
+58            android:name="br.com.movapp.activity.MainActivity"
+58-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:40:13-50
+59            android:label="@string/app_name"
+59-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:41:13-45
+60            android:launchMode="singleTop" />
+60-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:42:13-43
+61
+62        <service android:name="br.com.movapp.firebase.MovInstanceIDService" >
+62-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:44:9-48:19
+62-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:44:18-63
+63            <intent-filter>
+63-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:45:13-47:29
+64                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+64-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:46:17-80
+64-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:46:25-77
+65            </intent-filter>
+66        </service>
+67        <service android:name="br.com.movapp.firebase.MovMessagingService" >
+67-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:49:9-53:19
+67-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:49:18-62
+68            <intent-filter>
+68-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:50:13-52:29
+69                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+69-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:51:17-78
+69-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:51:25-75
+70            </intent-filter>
+71        </service>
+72        <!--
+73             FirebaseMessagingService performs security checks at runtime,
+74             no need for explicit permissions despite exported="true"
+75        -->
+76        <service
+76-->[com.google.firebase:firebase-messaging:17.3.3] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\82ec3d801fca5e5f1613884dd885510b\firebase-messaging-17.3.3\AndroidManifest.xml:28:9-34:19
+77            android:name="com.google.firebase.messaging.FirebaseMessagingService"
+77-->[com.google.firebase:firebase-messaging:17.3.3] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\82ec3d801fca5e5f1613884dd885510b\firebase-messaging-17.3.3\AndroidManifest.xml:29:13-82
+78            android:exported="true" >
+78-->[com.google.firebase:firebase-messaging:17.3.3] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\82ec3d801fca5e5f1613884dd885510b\firebase-messaging-17.3.3\AndroidManifest.xml:30:13-36
+79            <intent-filter android:priority="-500" >
+79-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:50:13-52:29
+80                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+80-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:51:17-78
+80-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:51:25-75
+81            </intent-filter>
+82        </service>
+83        <service
+83-->[com.google.firebase:firebase-measurement-connector-impl:17.0.2] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\09e8ed763e3c570e516fb58d3a9eaf94\firebase-measurement-connector-impl-17.0.2\AndroidManifest.xml:27:9-31:19
+84            android:name="com.google.firebase.components.ComponentDiscoveryService"
+84-->[com.google.firebase:firebase-measurement-connector-impl:17.0.2] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\09e8ed763e3c570e516fb58d3a9eaf94\firebase-measurement-connector-impl-17.0.2\AndroidManifest.xml:27:18-89
+85            android:exported="false" >
+85-->[com.google.firebase:firebase-iid:17.0.3] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\823aba5c451378b9ed92d5bbbc38d65f\firebase-iid-17.0.3\AndroidManifest.xml:31:13-37
+86            <meta-data
+86-->[com.google.firebase:firebase-measurement-connector-impl:17.0.2] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\09e8ed763e3c570e516fb58d3a9eaf94\firebase-measurement-connector-impl-17.0.2\AndroidManifest.xml:28:13-30:85
+87                android:name="com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar"
+87-->[com.google.firebase:firebase-measurement-connector-impl:17.0.2] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\09e8ed763e3c570e516fb58d3a9eaf94\firebase-measurement-connector-impl-17.0.2\AndroidManifest.xml:29:17-139
+88                android:value="com.google.firebase.components.ComponentRegistrar" />
+88-->[com.google.firebase:firebase-measurement-connector-impl:17.0.2] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\09e8ed763e3c570e516fb58d3a9eaf94\firebase-measurement-connector-impl-17.0.2\AndroidManifest.xml:30:17-82
+89            <meta-data
+89-->[com.google.firebase:firebase-iid:17.0.3] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\823aba5c451378b9ed92d5bbbc38d65f\firebase-iid-17.0.3\AndroidManifest.xml:32:13-34:85
+90                android:name="com.google.firebase.components:com.google.firebase.iid.Registrar"
+90-->[com.google.firebase:firebase-iid:17.0.3] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\823aba5c451378b9ed92d5bbbc38d65f\firebase-iid-17.0.3\AndroidManifest.xml:33:17-96
+91                android:value="com.google.firebase.components.ComponentRegistrar" />
+91-->[com.google.firebase:firebase-iid:17.0.3] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\823aba5c451378b9ed92d5bbbc38d65f\firebase-iid-17.0.3\AndroidManifest.xml:34:17-82
+92        </service>
+93
+94        <receiver
+94-->[com.google.firebase:firebase-analytics:16.0.4] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\3a60dc51969e059207963f992fd10ce9\firebase-analytics-16.0.4\AndroidManifest.xml:29:9-33:20
+95            android:name="com.google.android.gms.measurement.AppMeasurementReceiver"
+95-->[com.google.firebase:firebase-analytics:16.0.4] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\3a60dc51969e059207963f992fd10ce9\firebase-analytics-16.0.4\AndroidManifest.xml:30:13-85
+96            android:enabled="true"
+96-->[com.google.firebase:firebase-analytics:16.0.4] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\3a60dc51969e059207963f992fd10ce9\firebase-analytics-16.0.4\AndroidManifest.xml:31:13-35
+97            android:exported="false" >
+97-->[com.google.firebase:firebase-analytics:16.0.4] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\3a60dc51969e059207963f992fd10ce9\firebase-analytics-16.0.4\AndroidManifest.xml:32:13-37
+98        </receiver>
+99        <receiver
+99-->[com.google.firebase:firebase-analytics:16.0.4] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\3a60dc51969e059207963f992fd10ce9\firebase-analytics-16.0.4\AndroidManifest.xml:34:9-42:20
+100            android:name="com.google.android.gms.measurement.AppMeasurementInstallReferrerReceiver"
+100-->[com.google.firebase:firebase-analytics:16.0.4] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\3a60dc51969e059207963f992fd10ce9\firebase-analytics-16.0.4\AndroidManifest.xml:35:13-100
+101            android:enabled="true"
+101-->[com.google.firebase:firebase-analytics:16.0.4] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\3a60dc51969e059207963f992fd10ce9\firebase-analytics-16.0.4\AndroidManifest.xml:36:13-35
+102            android:exported="true"
+102-->[com.google.firebase:firebase-analytics:16.0.4] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\3a60dc51969e059207963f992fd10ce9\firebase-analytics-16.0.4\AndroidManifest.xml:37:13-36
+103            android:permission="android.permission.INSTALL_PACKAGES" >
+103-->[com.google.firebase:firebase-analytics:16.0.4] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\3a60dc51969e059207963f992fd10ce9\firebase-analytics-16.0.4\AndroidManifest.xml:38:13-69
+104            <intent-filter>
+104-->[com.google.firebase:firebase-analytics:16.0.4] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\3a60dc51969e059207963f992fd10ce9\firebase-analytics-16.0.4\AndroidManifest.xml:39:13-41:29
+105                <action android:name="com.android.vending.INSTALL_REFERRER" />
+105-->[com.google.firebase:firebase-analytics:16.0.4] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\3a60dc51969e059207963f992fd10ce9\firebase-analytics-16.0.4\AndroidManifest.xml:40:17-79
+105-->[com.google.firebase:firebase-analytics:16.0.4] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\3a60dc51969e059207963f992fd10ce9\firebase-analytics-16.0.4\AndroidManifest.xml:40:25-76
+106            </intent-filter>
+107        </receiver>
+108
+109        <service
+109-->[com.google.firebase:firebase-analytics:16.0.4] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\3a60dc51969e059207963f992fd10ce9\firebase-analytics-16.0.4\AndroidManifest.xml:44:9-47:40
+110            android:name="com.google.android.gms.measurement.AppMeasurementService"
+110-->[com.google.firebase:firebase-analytics:16.0.4] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\3a60dc51969e059207963f992fd10ce9\firebase-analytics-16.0.4\AndroidManifest.xml:45:13-84
+111            android:enabled="true"
+111-->[com.google.firebase:firebase-analytics:16.0.4] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\3a60dc51969e059207963f992fd10ce9\firebase-analytics-16.0.4\AndroidManifest.xml:46:13-35
+112            android:exported="false" />
+112-->[com.google.firebase:firebase-analytics:16.0.4] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\3a60dc51969e059207963f992fd10ce9\firebase-analytics-16.0.4\AndroidManifest.xml:47:13-37
+113        <service
+113-->[com.google.firebase:firebase-analytics:16.0.4] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\3a60dc51969e059207963f992fd10ce9\firebase-analytics-16.0.4\AndroidManifest.xml:48:9-52:72
+114            android:name="com.google.android.gms.measurement.AppMeasurementJobService"
+114-->[com.google.firebase:firebase-analytics:16.0.4] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\3a60dc51969e059207963f992fd10ce9\firebase-analytics-16.0.4\AndroidManifest.xml:49:13-87
+115            android:enabled="true"
+115-->[com.google.firebase:firebase-analytics:16.0.4] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\3a60dc51969e059207963f992fd10ce9\firebase-analytics-16.0.4\AndroidManifest.xml:50:13-35
+116            android:exported="false"
+116-->[com.google.firebase:firebase-analytics:16.0.4] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\3a60dc51969e059207963f992fd10ce9\firebase-analytics-16.0.4\AndroidManifest.xml:51:13-37
+117            android:permission="android.permission.BIND_JOB_SERVICE" />
+117-->[com.google.firebase:firebase-analytics:16.0.4] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\3a60dc51969e059207963f992fd10ce9\firebase-analytics-16.0.4\AndroidManifest.xml:52:13-69
+118
+119        <receiver
+119-->[com.google.firebase:firebase-iid:17.0.3] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\823aba5c451378b9ed92d5bbbc38d65f\firebase-iid-17.0.3\AndroidManifest.xml:37:9-44:20
+120            android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
+120-->[com.google.firebase:firebase-iid:17.0.3] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\823aba5c451378b9ed92d5bbbc38d65f\firebase-iid-17.0.3\AndroidManifest.xml:38:13-78
+121            android:exported="true"
+121-->[com.google.firebase:firebase-iid:17.0.3] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\823aba5c451378b9ed92d5bbbc38d65f\firebase-iid-17.0.3\AndroidManifest.xml:39:13-36
+122            android:permission="com.google.android.c2dm.permission.SEND" >
+122-->[com.google.firebase:firebase-iid:17.0.3] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\823aba5c451378b9ed92d5bbbc38d65f\firebase-iid-17.0.3\AndroidManifest.xml:40:13-73
+123            <intent-filter>
+123-->[com.google.firebase:firebase-iid:17.0.3] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\823aba5c451378b9ed92d5bbbc38d65f\firebase-iid-17.0.3\AndroidManifest.xml:41:13-43:29
+124                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+124-->[com.google.firebase:firebase-iid:17.0.3] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\823aba5c451378b9ed92d5bbbc38d65f\firebase-iid-17.0.3\AndroidManifest.xml:42:17-81
+124-->[com.google.firebase:firebase-iid:17.0.3] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\823aba5c451378b9ed92d5bbbc38d65f\firebase-iid-17.0.3\AndroidManifest.xml:42:25-78
+125            </intent-filter>
+126        </receiver>
+127        <!--
+128             FirebaseInstanceIdService performs security checks at runtime,
+129             no need for explicit permissions despite exported="true"
+130        -->
+131        <service
+131-->[com.google.firebase:firebase-iid:17.0.3] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\823aba5c451378b9ed92d5bbbc38d65f\firebase-iid-17.0.3\AndroidManifest.xml:50:9-56:19
+132            android:name="com.google.firebase.iid.FirebaseInstanceIdService"
+132-->[com.google.firebase:firebase-iid:17.0.3] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\823aba5c451378b9ed92d5bbbc38d65f\firebase-iid-17.0.3\AndroidManifest.xml:51:13-77
+133            android:exported="true" >
+133-->[com.google.firebase:firebase-iid:17.0.3] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\823aba5c451378b9ed92d5bbbc38d65f\firebase-iid-17.0.3\AndroidManifest.xml:52:13-36
+134            <intent-filter android:priority="-500" >
+134-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:45:13-47:29
+135                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+135-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:46:17-80
+135-->D:\mov\app\mov-app\app\src\main\AndroidManifest.xml:46:25-77
+136            </intent-filter>
+137        </service>
+138
+139        <activity
+139-->[com.google.android.gms:play-services-base:16.0.1] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\daaa178d61196a59ad54939f8bfa538d\play-services-base-16.0.1\AndroidManifest.xml:23:9-26:75
+140            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+140-->[com.google.android.gms:play-services-base:16.0.1] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\daaa178d61196a59ad54939f8bfa538d\play-services-base-16.0.1\AndroidManifest.xml:24:13-79
+141            android:exported="false"
+141-->[com.google.android.gms:play-services-base:16.0.1] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\daaa178d61196a59ad54939f8bfa538d\play-services-base-16.0.1\AndroidManifest.xml:25:13-37
+142            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+142-->[com.google.android.gms:play-services-base:16.0.1] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\daaa178d61196a59ad54939f8bfa538d\play-services-base-16.0.1\AndroidManifest.xml:26:13-72
+143
+144        <provider
+144-->[com.google.firebase:firebase-common:16.0.3] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\0df43b3388842e83118187d2a81f2d40\firebase-common-16.0.3\AndroidManifest.xml:10:9-14:39
+145            android:name="com.google.firebase.provider.FirebaseInitProvider"
+145-->[com.google.firebase:firebase-common:16.0.3] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\0df43b3388842e83118187d2a81f2d40\firebase-common-16.0.3\AndroidManifest.xml:11:13-77
+146            android:authorities="br.com.movapp.firebaseinitprovider"
+146-->[com.google.firebase:firebase-common:16.0.3] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\0df43b3388842e83118187d2a81f2d40\firebase-common-16.0.3\AndroidManifest.xml:12:13-72
+147            android:exported="false"
+147-->[com.google.firebase:firebase-common:16.0.3] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\0df43b3388842e83118187d2a81f2d40\firebase-common-16.0.3\AndroidManifest.xml:13:13-37
+148            android:initOrder="100" />
+148-->[com.google.firebase:firebase-common:16.0.3] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\0df43b3388842e83118187d2a81f2d40\firebase-common-16.0.3\AndroidManifest.xml:14:13-36
+149
+150        <meta-data
+150-->[com.google.android.gms:play-services-basement:16.0.1] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\9d2e6d71ec276a6f3a42006215259386\play-services-basement-16.0.1\AndroidManifest.xml:23:9-25:69
+151            android:name="com.google.android.gms.version"
+151-->[com.google.android.gms:play-services-basement:16.0.1] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\9d2e6d71ec276a6f3a42006215259386\play-services-basement-16.0.1\AndroidManifest.xml:24:13-58
+152            android:value="@integer/google_play_services_version" />
+152-->[com.google.android.gms:play-services-basement:16.0.1] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\9d2e6d71ec276a6f3a42006215259386\play-services-basement-16.0.1\AndroidManifest.xml:25:13-66
+153
+154        <provider
+154-->[android.arch.lifecycle:extensions:1.1.1] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\4fbe8bc7327217cb41b21969af4b67bf\extensions-1.1.1\AndroidManifest.xml:23:9-27:43
+155            android:name="android.arch.lifecycle.ProcessLifecycleOwnerInitializer"
+155-->[android.arch.lifecycle:extensions:1.1.1] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\4fbe8bc7327217cb41b21969af4b67bf\extensions-1.1.1\AndroidManifest.xml:24:13-83
+156            android:authorities="br.com.movapp.lifecycle-trojan"
+156-->[android.arch.lifecycle:extensions:1.1.1] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\4fbe8bc7327217cb41b21969af4b67bf\extensions-1.1.1\AndroidManifest.xml:25:13-68
+157            android:exported="false"
+157-->[android.arch.lifecycle:extensions:1.1.1] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\4fbe8bc7327217cb41b21969af4b67bf\extensions-1.1.1\AndroidManifest.xml:26:13-37
+158            android:multiprocess="true" />
+158-->[android.arch.lifecycle:extensions:1.1.1] C:\Users\italo\.gradle\caches\transforms-2\files-2.1\4fbe8bc7327217cb41b21969af4b67bf\extensions-1.1.1\AndroidManifest.xml:27:13-40
+159    </application>
+160
+161</manifest>

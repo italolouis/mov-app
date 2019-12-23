@@ -1,0 +1,44 @@
+{
+  "project_info": {
+    "project_number": "34232573142",
+    "firebase_url": "https://mov-app-e7877.firebaseio.com",
+    "project_id": "mov-app-e7877",
+    "storage_bucket": "mov-app-e7877.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:34232573142:android:4d63049269bce0dd",
+        "android_client_info": {
+          "package_name": "br.com.movapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "34232573142-hgl456u2moq8pqspkq3dkt12t5fogiv1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.movapp",
+            "certificate_hash": "e26b5bc793664865577d9464c2b969563b2086d0"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFq_jbUitM3iUjRDAZaVjisXrb92SFF9I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "34232573142-1u50sh1mn5h618cr5325q9bddkeefa1c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
