@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: com.ernestoyaquello.stepperform:vertical-stepper-form:0.9.9@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/vertical-stepper-form-0.9.9.aar/b268bb334293065b765a144fc2d0cb8d/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/vertical-stepper-form-0.9.9.aar/b268bb334293065b765a144fc2d0cb8d/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b8333c0482043de697d6b9cf733c21c4/vertical-stepper-form-0.9.9/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b8333c0482043de697d6b9cf733c21c4/vertical-stepper-form-0.9.9/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.ernestoyaquello.stepperform/vertical-stepper-form/0.9.9/98153373ce5edd2b63a8be924e5e689fa4c5e150/vertical-stepper-form-0.9.9-javadoc.jar!/" />
